@@ -1,6 +1,8 @@
 (function(scope){
 'use strict';
 const own=(o,k)=>!!o&&Object.hasOwn(o,k),bounded=(v,min,max,fallback=0)=>Number.isFinite(Number(v))?Math.max(min,Math.min(max,Number(v))):fallback;
+const BOSS_SCHEDULE=Object.freeze([240,420,540]);
+const LIEUTENANTS=[['Der Hafenschild','Die Riffjägerin'],['Der Eisenwallvogt','Die Schlackenjägerin'],['Der Nachtvogt','Die Abgrundjägerin']];
 const rows=[
  ['glockenhafen','Glockenhafen','Bell Harbor',0,1,0,['harbor'],['harbor'],'world-bell-tower',1,'The harbor bell still rings beneath the tide. Reclaim the first sea lane for the Hanse fleet.','Der Hafenknecht',90,800,.9,.9,.95,1.05,30],
  ['korallenhof','Korallenhof','Coral Court',0,1,1,['glockenhafen'],['glockenhafen'],'world-anemone',1,'Lantern anemones grow through a sunken merchant court. Follow their light and drive out its squatter.','Die Korallenhüterin',100,1000,.95,.85,1,1.15,35],
@@ -22,9 +24,9 @@ const pct=n=>{const v=Math.round((n-1)*100);return v===0?'standard':(v>0?'+':'')
 const NODES=[{id:'harbor',name:'Heimathafen',english:'Home Harbor',stage:0,kind:'harbor',q:0,r:0,links:['glockenhafen'],requires:[],model:'world-bell-tower',difficulty:1,desc:'The Hanse fleet begins here. Choose a cleared sea lane, refit your citadel, and chart the next expedition.',objective:'Chart the sunken sea lanes.',condition:'Safe harbor',reward:0,boss:'',bossAt:0,bossHP:0,enemyHp:1,enemyDamage:1,enemySpeed:1,goldMult:1}];
 for(const [id,name,english,stage,q,r,links,requires,model,difficulty,desc,boss,bossAt,bossHP,enemyHp,enemyDamage,enemySpeed,goldMult,reward] of rows){
  NODES.push({id,name,english,stage,kind:'mission',q,r,links:[...links],requires:[...requires],model,difficulty,desc,
-  objective:'Defeat '+boss+' and secure the sea lane.',
+  objective:'Defeat all three guardians in one dive: the vanguard, the hunter, and '+boss+'.',
   condition:'Patrol hulls '+pct(enemyHp)+' · Enemy damage '+pct(enemyDamage)+' · Enemy speed '+pct(enemySpeed)+' · Salvage gold '+pct(goldMult),
-  reward,boss,bossAt,bossHP,enemyHp,enemyDamage,enemySpeed,goldMult});
+  reward,boss,bossAt:BOSS_SCHEDULE[0],bossHP,enemyHp,enemyDamage,enemySpeed,goldMult,bossWaves:Object.freeze(BOSS_SCHEDULE.map((at,i)=>Object.freeze({at,name:i<2?LIEUTENANTS[stage][i]:boss,role:['vanguard','hunter','sovereign'][i],hpMult:[4,12,28][i],damageMult:[1,1.3,1.6][i]})))});
 }
 const BY_ID=Object.fromEntries(NODES.map(n=>[n.id,n]));
 for(const n of NODES)for(const id of n.links)if(!BY_ID[id].links.includes(n.id))BY_ID[id].links.push(n.id);
@@ -51,9 +53,13 @@ function sanitizeCampaign(raw){
  if(own(BY_ID,raw.position)&&pathTo(state,raw.position))state.position=raw.position;
  return state;
 }
-function recordResult(state,game){
+function isMissionVictory(game){
+ const node=own(BY_ID,game?.missionId)?BY_ID[game.missionId]:null,kills=game?.bossKillWaves;
+ return !!node&&node.kind==='mission'&&game.state==='won'&&game.bosses===3&&game.bossesSpawned===3&&Array.isArray(kills)&&kills.length===3&&new Set(kills).size===3&&[0,1,2].every(i=>kills.includes(i))&&(!Array.isArray(game.enemies)||!game.enemies.some(e=>e.kind==='boss'&&e.hp>0));
+}function recordResult(state,game){
  const id=game?.missionId,n=own(BY_ID,id)?BY_ID[id]:null,runId=game?.runId;
  if(!n||n.kind!=='mission'||!['won','lost'].includes(game.state)||typeof runId!=='string'||!runId||runId.length>160||!Array.isArray(state?.settled)||state.settled.includes(runId)||!isUnlocked(state,id))return 0;
+ if(game.state==='won'&&!isMissionVictory(game))return 0;
  state.settled.push(runId);if(game.state!=='won')return 0;
  const old=own(state.cleared,id)?state.cleared[id]:null,time=bounded(game.time,0,1e7),level=Math.floor(bounded(game.level,1,10000,1));
  state.cleared[id]={wins:old?Math.min(1e6,(old.wins||1)+1):1,bestTime:old&&old.bestTime>0?Math.min(old.bestTime,time):time,bestLevel:Math.max(old?.bestLevel||1,level),firstRunId:old?.firstRunId||runId};
@@ -65,5 +71,5 @@ function completionSummary(state){
   regions:[0,1,2].map(stage=>({stage,cleared:missions.filter(n=>n.stage===stage&&own(state?.cleared,n.id)).length,total:5})),
   available:missions.filter(n=>isUnlocked(state,n.id)&&!own(state?.cleared,n.id)).map(n=>n.id),position:own(BY_ID,state?.position)?state.position:'harbor'};
 }
-const api={NODES,BY_ID,freshCampaign,sanitizeCampaign,isUnlocked,pathTo,moveTo,recordResult,completionSummary};scope.UBCampaign=api;if(typeof module!=='undefined')module.exports=api;
+const api={BOSS_SCHEDULE,NODES,BY_ID,isMissionVictory,freshCampaign,sanitizeCampaign,isUnlocked,pathTo,moveTo,recordResult,completionSummary};scope.UBCampaign=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

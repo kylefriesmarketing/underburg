@@ -1,5 +1,5 @@
 {
-  "version": "0.6",
+  "version": "0.7",
   "files": [
     "index.html",
     "ui.css",
@@ -20,6 +20,8 @@
     "expansion.css",
     "ship-livery.js",
     "combat-fx.js",
+    "boss-ui.js",
+    "boss-ui.css",
     "LICENSES.md",
     "assets/lib/BufferGeometryUtils.js",
     "assets/lib/GLTFLoader.js",
@@ -99,5 +101,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 13852411
+  "bytes": 13864400
 }

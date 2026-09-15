@@ -21,6 +21,7 @@ export class Soundscape{
   if(e.type==='level'){this.chord([293.66,440,587.33],1,.07);}
   if(e.type==='heal'){this.tone(440,.55,'sine',.06,880);this.tone(659,.7,'sine',.04,1175,.1);}
   if(e.type==='boss'||e.type==='overtime'){this.tone(55,2,'sawtooth',.07,49);this.tone(58.27,2,'sawtooth',.045,52);this.tone(146.83,2.5,'sine',.08);}
+  if(e.type==='bossDefeated')this.chord([196,246.94,293.66,392],1.6,.065);
   if(e.type==='bossCharge'){this.tone(73.42,.6,'triangle',.08,55);this.tone(146.83,.4,'sine',.04,110,.13);}
   if(e.type==='enemyTelegraph'&&throttle('warning',.8)){this.tone(440,.16,'triangle',.045,360);this.tone(440,.16,'triangle',.035,360,.23);}
   if(e.type==='railFire'&&throttle('railFire',.08)){this.noise(.22,.08,3100);this.tone(1200,.23,'sawtooth',.025,80);}
@@ -30,5 +31,5 @@ export class Soundscape{
   if(e.type==='won'||e.type==='sector')this.chord([146.83,220,293.66,369.99,440,587.33],3,.08);
   if(e.type==='jackpot')this.chord([587.33,880,1174.66],1.8,.08);
  }
- update(game){if(!this.enabled||!this.ctx)return;const c=this.ctx;if(c.currentTime<this.musicAt)return;this.musicAt=c.currentTime+.48;const progression=[[146.83,220,293.66,349.23],[130.81,196,261.63,329.63],[116.54,174.61,233.08,293.66],[130.81,196,261.63,349.23]],bar=Math.floor(this.note/16)%4,chord=progression[bar];if(this.note%16===0)chord.forEach(n=>this.tone(n,6.5,'sine',.018,n));if(this.note%4===0){const n=chord[(this.note/4)%4]*2;this.tone(n,1.9,'sine',.018,n,0,Math.sin(this.note)*.5);}if(game?.bossSpawned&&this.note%2===0){this.tone(55,.35,'sine',.05,31);this.noise(.08,.016,300);}if(this.note%32===20)this.tone(1175,1.8,'sine',.008,920);this.note++;}
+ update(game){if(!this.enabled||!this.ctx)return;const c=this.ctx;if(c.currentTime<this.musicAt)return;this.musicAt=c.currentTime+.48;const progression=[[146.83,220,293.66,349.23],[130.81,196,261.63,329.63],[116.54,174.61,233.08,293.66],[130.81,196,261.63,349.23]],bar=Math.floor(this.note/16)%4,chord=progression[bar];if(this.note%16===0)chord.forEach(n=>this.tone(n,6.5,'sine',.018,n));if(this.note%4===0){const n=chord[(this.note/4)%4]*2;this.tone(n,1.9,'sine',.018,n,0,Math.sin(this.note)*.5);}if(game?.enemies.some(e=>e.kind==='boss'&&e.hp>0)&&this.note%2===0){this.tone(55,.35,'sine',.05,31);this.noise(.08,.016,300);}if(this.note%32===20)this.tone(1175,1.8,'sine',.008,920);this.note++;}
 }
