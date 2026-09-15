@@ -13,3 +13,9 @@
  #atlas-metrics:has(.atlas-boss-schedule)>span:last-child b{font-size:12px;line-height:14px;white-space:nowrap}
  #atlas-metrics:has(.atlas-boss-schedule)>span:last-child small{margin-top:0;font-size:5px;line-height:1.3;letter-spacing:.2px}
 }
+
+/* Signature attacks expose a clearly timed counterattack window. */
+.boss-phase{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:6px;min-height:10px;text-align:left}.boss-phase strong{font-size:7px;letter-spacing:.7px;font-weight:650;color:#a1b7b0}.boss-phase em{font:500 8px 'Segoe UI',sans-serif;font-variant-numeric:tabular-nums;color:#bec6b4;white-space:nowrap}.boss-contact[data-phase="windup"] .boss-phase strong,.boss-contact[data-phase="attack"] .boss-phase strong{color:#ffc18c}.boss-contact[data-enraged="true"]>div:first-child b{color:#ffac99}#boss-contacts .boss-contact[data-phase="recovery"] i{background:#b0ffd4;box-shadow:0 0 8px #8ef3b577}.boss-contact[data-phase="recovery"] .boss-phase strong,.boss-contact[data-phase="recovery"] .boss-phase em{color:#b0ffd4}
+@media(max-width:850px){.boss-phase{margin-top:5px;gap:3px}.boss-phase strong{font-size:6px;letter-spacing:0}.boss-phase em{font-size:6px}#hud:has(#boss-hud.mission-bosses:not(.hidden)) .telemetry{top:314px}#hud:has(#boss-hud.mission-bosses:not(.hidden)) #toast{top:312px}}
+
+@media(min-width:851px){#hud:has(#boss-hud.mission-bosses:not(.hidden)) #toast{top:calc(128px + var(--active-boss-count,1)*46px)}}

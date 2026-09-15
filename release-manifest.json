@@ -1,5 +1,5 @@
 {
-  "version": "0.10",
+  "version": "0.11",
   "files": [
     "index.html",
     "ui.css",
@@ -27,6 +27,9 @@
     "expedition-ui.css",
     "expedition-world.js",
     "reward-cards.css",
+    "ship-growth.js",
+    "impact-fx.js",
+    "propulsion-audio.js",
     "LICENSES.md",
     "assets/lib/BufferGeometryUtils.js",
     "assets/lib/GLTFLoader.js",
@@ -56,6 +59,13 @@
     "assets/models/expansion-manifest.json",
     "assets/models/fan.glb",
     "assets/models/fleet-manifest.json",
+    "assets/models/growth-battery.glb",
+    "assets/models/growth-crown.glb",
+    "assets/models/growth-deck.glb",
+    "assets/models/growth-engine.glb",
+    "assets/models/growth-manifest.json",
+    "assets/models/growth-reactor.glb",
+    "assets/models/growth-tower.glb",
     "assets/models/kelp.glb",
     "assets/models/manifest.json",
     "assets/models/module-arc.glb",
@@ -129,5 +139,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 20861011
+  "bytes": 21474295
 }

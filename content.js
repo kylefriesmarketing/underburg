@@ -1,10 +1,16 @@
 (function(scope){
 'use strict';
 const HULLS={
- nautilus:{radius:30,visualScale:1,name:'Nautilus',title:'DER ENTDECKER',hp:185,speed:173,turn:3.8,magnet:150,color:0x5cacaa,desc:'Balanced explorer. +25% salvage reach. Finds opportunity in every ruin.'},
- bastion:{radius:40,visualScale:1.28,name:'Eisenwall',title:'DIE FESTUNG',hp:265,speed:143,turn:2.8,magnet:115,color:0xc1aa80,desc:'Armored citadel. +43% starting hull and stronger ramming. Slow, deliberate, relentless.'},
- wraith:{radius:23,visualScale:.8,name:'Nachtjäger',title:'DER JÄGER',hp:145,speed:211,turn:5,magnet:120,color:0x8fbcc7,desc:'Fast hunter. +15% weapon rate. Fragile hull, devastating pursuit.'}
+ nautilus:{radius:30,visualScale:1,name:'Nautilus',title:'DER ENTDECKER',hp:185,speed:173,turn:5.4,acceleration:7.2,braking:11,reverseBraking:13,ramDamage:110,ramImpulse:520,magnet:150,color:0x5cacaa,desc:'Balanced explorer. +25% salvage reach. Finds opportunity in every ruin.'},
+ bastion:{radius:40,visualScale:1.28,name:'Eisenwall',title:'DIE FESTUNG',hp:265,speed:143,turn:3.8,acceleration:5.2,braking:8,reverseBraking:9.5,ramDamage:175,ramImpulse:660,magnet:115,color:0xc1aa80,desc:'Armored citadel. +43% starting hull and stronger ramming. Slow, deliberate, relentless.'},
+ wraith:{radius:23,visualScale:.8,name:'Nachtjäger',title:'DER JÄGER',hp:145,speed:211,turn:7.2,acceleration:10,braking:14,reverseBraking:16,ramDamage:95,ramImpulse:440,magnet:120,color:0x8fbcc7,desc:'Fast hunter. +15% weapon rate. Fragile hull, devastating pursuit.'}
 };
+const RAM=Object.freeze({cooldown:.5,targetCooldown:1,minSpeed:.68,minClosing:.35,velocityRetention:.58,knockDrag:7,stun:.22,tierDamage:.16});
+const BOSS_COMBAT=Object.freeze({
+ vanguard:Object.freeze({name:'Glockensalve',english:'Bell broadside',pattern:'fan',initial:1.4,range:1100,cooldown:6.5,windup:1.35,attack:.76,recovery:2.5,exposedMult:1.6,interruptRecovery:2.2,length:840,arc:1.65,enragedArc:2.05,shots:9,enragedShots:13,bursts:2,enragedBursts:3,projectileSpeed:250,damage:1.15}),
+ hunter:Object.freeze({name:'Jagdlanze',english:'Pursuit lance',pattern:'lance',initial:1.4,range:1100,cooldown:5.8,windup:1.2,attack:1.15,recovery:2.7,exposedMult:1.6,interruptRecovery:2.2,length:680,enragedLength:870,width:12,damage:1.8}),
+ sovereign:Object.freeze({name:'Kronenbruch',english:'Crown barrage',pattern:'barrage',initial:1.4,range:1100,cooldown:7,windup:1.6,attack:1.3,recovery:3,exposedMult:1.6,interruptRecovery:2.2,radius:105,enragedRadius:120,spread:230,damage:1.6})
+});
 const CAPTAINS={
  greta:{name:'Greta Stahl',role:'THE SHIPWRIGHT',icon:'⚒',desc:'+15% maximum hull. Repairs restore 20% more health.',hp:1.15,repair:1.2},
  otto:{name:'Otto Goldmann',role:'THE SALVAGE BARON',icon:'◈',desc:'+25% gold from all sources. Start each expedition with 25 extra gold.',gold:1.25,startGold:25},
@@ -112,5 +118,5 @@ const BIOMES=[
  {name:'Der Eisenfriedhof',english:'The Iron Graveyard',depth:1540,color:0x173444,fog:0x122f43,sand:0x35424c,boss:'Die Rostkönigin',bossAt:165,bossHP:4800,desc:'A fleet of drowned factories. Rich cargo lies among the pressure mines.'},
  {name:'Der Schwarze Graben',english:'The Black Trench',depth:2700,color:0x101e35,fog:0x111c32,sand:0x252d43,boss:'Der Tiefenfürst',bossAt:180,bossHP:8500,desc:'Geothermal vents light the last descent. The sovereign of the abyss awaits.'}
 ];
-scope.UBContent={HULLS,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,ENEMIES,DEFAULT_ENEMY_ROSTER,normalizeRarity,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
+scope.UBContent={HULLS,RAM,BOSS_COMBAT,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,ENEMIES,DEFAULT_ENEMY_ROSTER,normalizeRarity,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
 })(typeof window!=='undefined'?window:globalThis);

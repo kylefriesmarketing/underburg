@@ -1,0 +1,202 @@
+{
+  "growth-deck": {
+    "file": "growth-deck.glb",
+    "triangles": 892,
+    "meshes": 4,
+    "bytes": 64540,
+    "bounds": {
+      "min": [
+        -1.7,
+        0.0,
+        -0.795
+      ],
+      "max": [
+        1.7,
+        0.944,
+        0.795
+      ]
+    },
+    "dimensions": [
+      3.4,
+      0.944,
+      1.59
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Riveted armored side gallery with luminous lancets, brass guardrails, capstan finials and diagonal mounting braces.",
+    "deckSurface": 0.327,
+    "intendedMount": "Outer side hardpoints, around local Y2.35; rotate or mirror for port and starboard."
+  },
+  "growth-engine": {
+    "file": "growth-engine.glb",
+    "triangles": 2464,
+    "meshes": 5,
+    "bytes": 148764,
+    "bounds": {
+      "min": [
+        -1.4175,
+        0.0,
+        -1.11
+      ],
+      "max": [
+        1.325,
+        1.62,
+        1.11
+      ]
+    },
+    "dimensions": [
+      2.7425,
+      1.62,
+      2.22
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Paired pressure engines with compression ribs, luminous aft exhaust ducts, copper-roofed pressure regulator and exposed feed pipes.",
+    "exhaustAxis": "-X",
+    "intendedMount": "Aft hull around X-3.35,Y1.0; local base centered between both engines."
+  },
+  "growth-tower": {
+    "file": "growth-tower.glb",
+    "triangles": 596,
+    "meshes": 5,
+    "bytes": 45324,
+    "bounds": {
+      "min": [
+        -0.634,
+        0.0,
+        -0.634
+      ],
+      "max": [
+        0.634,
+        2.492,
+        0.634
+      ]
+    },
+    "dimensions": [
+      1.268,
+      2.492,
+      1.268
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Narrow Gothic signal spire with four luminous lancets, a steep copper helm, golden braces and pearl finial.",
+    "intendedMount": "Outer gallery or free aft corner; XZ footprint1.3 units."
+  },
+  "growth-reactor": {
+    "file": "growth-reactor.glb",
+    "triangles": 1276,
+    "meshes": 5,
+    "bytes": 94952,
+    "bounds": {
+      "min": [
+        -0.775,
+        0.0,
+        -0.72
+      ],
+      "max": [
+        0.775,
+        2.065,
+        0.72
+      ]
+    },
+    "dimensions": [
+      1.55,
+      2.065,
+      1.44
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Luminous faceted core suspended inside a swept brass cage, with an orthogonal containment orbit and copper crown.",
+    "intendedMount": "Aft machinery platform near X-3.1,Y3.05."
+  },
+  "growth-battery": {
+    "file": "growth-battery.glb",
+    "triangles": 1244,
+    "meshes": 4,
+    "bytes": 80584,
+    "bounds": {
+      "min": [
+        -1.035,
+        0.0,
+        -1.06
+      ],
+      "max": [
+        1.035,
+        0.78,
+        1.06
+      ]
+    },
+    "dimensions": [
+      2.07,
+      0.78,
+      2.12
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Open annular armored turret balcony with rotating brass bearing, angled frontal shields and mounting braces.",
+    "deckSurface": 0.35,
+    "clearApertureDiameter": 1.1,
+    "intendedMount": "Stable hardpoint socket beneath the weapon; weapon mesh can recoil independently."
+  },
+  "growth-crown": {
+    "file": "growth-crown.glb",
+    "triangles": 2052,
+    "meshes": 5,
+    "bytes": 129488,
+    "bounds": {
+      "min": [
+        -1.8,
+        0.0,
+        -1.39
+      ],
+      "max": [
+        1.8,
+        1.955,
+        1.39
+      ]
+    },
+    "dimensions": [
+      3.6,
+      1.955,
+      2.78
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Open imperial citadel crown: four copper-helmed towers, stepped Hanseatic gables, luminous lancets and castellated parapets.",
+    "clearAperture": [
+      2.6,
+      1.4
+    ],
+    "intendedMount": "Around the upper mount near X-1.1,Y4.5; open center preserves the upper weapon."
+  }
+}

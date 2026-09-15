@@ -8,4 +8,4 @@ No installation or account required. Use a modern browser with WebGL. Progress s
 
 **Controls:** WASD/arrows steer; Shift boosts; Space emits sonar; Q/E/R/F/C/V trigger abilities; X fires all ready abilities; B opens upgrades; G interacts with a site; T opens the survey chart. On the sea chart, drag to pan, scroll to zoom, and select a tile to choose a mission. Touch controls are included.
 
-Original Blender ships, relics, fortified sites and five sculpted rarity card frames, plus synthesized audio. Third-party library notices are in [LICENSES.md](LICENSES.md).
+Original Blender ships, relics, fortified sites, six automatically assembling fortress parts and five sculpted rarity card frames. Distinct hull handling, discrete boost ramming, recoil, wakes and responsive engine sounds bring the fleet to life. Guardians telegraph signature attacks and expose their engines after committing; interrupt with sonar for a counterattack opening. Third-party library notices are in [LICENSES.md](LICENSES.md).

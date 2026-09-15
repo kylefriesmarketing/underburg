@@ -4,7 +4,7 @@
 const WORLD_ASSETS=['world-bell-tower','world-arch','world-observatory','world-foundry','world-pipeline','world-basalt','world-crystal','world-anemone'];
 
 const MAP_EXTENT=4300,BOUNDARY_SEGMENTS=512,TAU=Math.PI*2;
-const EXPANSION_ASSETS=['site-bastion','site-salvage','site-beacon','site-shrine','module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
+const EXPANSION_ASSETS=['growth-deck','growth-engine','growth-tower','growth-reactor','growth-battery','growth-crown','site-bastion','site-salvage','site-beacon','site-shrine','module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
 const stageIndex=stage=>Math.max(0,Math.min(2,Math.floor(Number(stage)||0)));
 function basinShape(a,stage){
  if(stage===0)return 3810+135*Math.cos(a*2+.3)+65*Math.sin(a*3-.7)+35*Math.cos(a*7+1.1);

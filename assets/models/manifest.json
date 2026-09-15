@@ -2,8 +2,8 @@
   "nautilus": {
     "file": "nautilus.glb",
     "triangles": 7068,
-    "meshes": 6,
-    "bytes": 412112,
+    "meshes": 8,
+    "bytes": 414052,
     "bounds": {
       "min": [
         -5.0,
@@ -23,13 +23,47 @@
     ],
     "forwardAxis": "+X",
     "upAxis": "+Y",
-    "description": "Hanseatic merchant fortress: petrol pressure hull, steep red-copper guildhall, stepped gables, twin aft turrets and brass maritime anchor."
+    "description": "Hanseatic merchant fortress: petrol pressure hull, steep red-copper guildhall, stepped gables, twin aft turrets and brass maritime anchor.",
+    "rotors": [
+      {
+        "name": "Runtime rotor 01 | nautilus",
+        "axle": [
+          -4.55,
+          1.12,
+          1.65
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      },
+      {
+        "name": "Runtime rotor 02 | nautilus",
+        "axle": [
+          -4.55,
+          1.12,
+          -1.65
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      }
+    ]
   },
   "bastion": {
     "file": "bastion.glb",
     "triangles": 8122,
-    "meshes": 5,
-    "bytes": 492144,
+    "meshes": 7,
+    "bytes": 492904,
     "bounds": {
       "min": [
         -4.96,
@@ -49,13 +83,47 @@
     ],
     "forwardAxis": "+X",
     "upAxis": "+Y",
-    "description": "Broad twin-pontoon Prussian fortress: heavy armor belts, four copper-helmed bastions, central keep and armored ram prow."
+    "description": "Broad twin-pontoon Prussian fortress: heavy armor belts, four copper-helmed bastions, central keep and armored ram prow.",
+    "rotors": [
+      {
+        "name": "Runtime rotor 01 | bastion",
+        "axle": [
+          -4.53,
+          1.14,
+          1.67
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      },
+      {
+        "name": "Runtime rotor 02 | bastion",
+        "axle": [
+          -4.53,
+          1.14,
+          -1.67
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      }
+    ]
   },
   "wraith": {
     "file": "wraith.glb",
     "triangles": 5196,
-    "meshes": 6,
-    "bytes": 314720,
+    "meshes": 8,
+    "bytes": 315060,
     "bounds": {
       "min": [
         -4.94,
@@ -75,7 +143,41 @@
     ],
     "forwardAxis": "+X",
     "upAxis": "+Y",
-    "description": "Low narrow Gothic hunter: swept diving foils, forked prow, blue lancet windows, low copper roof and slender watch spire."
+    "description": "Low narrow Gothic hunter: swept diving foils, forked prow, blue lancet windows, low copper roof and slender watch spire.",
+    "rotors": [
+      {
+        "name": "Runtime rotor 01 | wraith",
+        "axle": [
+          -4.4954,
+          1.07,
+          1.26
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      },
+      {
+        "name": "Runtime rotor 02 | wraith",
+        "axle": [
+          -4.4954,
+          1.07,
+          -1.26
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "triangles": 160,
+        "meshes": 1,
+        "material": "Fittings | worn maritime brass"
+      }
+    ]
   },
   "corsair": {
     "file": "corsair.glb",
