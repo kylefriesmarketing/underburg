@@ -23,33 +23,47 @@ const WEAPONS={
  mines:{name:'Minenkranz',subtitle:'Stern-launched proximity charges',slot:'STERN',family:'explosive',icon:'✹',color:'#f0a584',damage:83,cooldown:3.3,range:290,active:15,desc:'Leave explosive traps in your wake.',ability:'Deploy a ring of eight armed mines.',model:'mines'},
  harpoon:{name:'Walzahn',subtitle:'Armor-piercing harpoon',slot:'BOW',family:'kinetic',icon:'↠',color:'#bfc9c9',damage:59,cooldown:2.6,range:720,active:14,desc:'Heavy bolts pierce multiple hulls and drag them back.',ability:'Fire a fan of seven reinforced harpoons.',model:'harpoon'},
  drone:{name:'Taucherschwarm',subtitle:'Autonomous diving-bell wing',slot:'STARBOARD',family:'drone',icon:'⋈',color:'#b8eac7',damage:13,cooldown:.85,range:520,active:22,desc:'Orbiting drones fire at nearby hostiles.',ability:'Overclock the swarm for 7 seconds.',model:'drone'},
- cryo:{name:'Eisatem',subtitle:'Supercooled brine projector',slot:'PORT',family:'cryo',icon:'❄',color:'#9edfea',damage:11,cooldown:.42,range:240,active:16,desc:'Brine slows approaching enemies and freezes the seabed.',ability:'Flash-freeze everything in a wide radius.',model:'cryo'}
+ cryo:{name:'Eisatem',subtitle:'Supercooled brine projector',slot:'PORT',family:'cryo',icon:'❄',color:'#9edfea',damage:11,cooldown:.42,range:240,active:16,desc:'Brine slows approaching enemies and freezes the seabed.',ability:'Flash-freeze everything in a wide radius.',model:'cryo'},
+ rail:{name:'Sternlanze',subtitle:'Capacitor rail lance',slot:'BOW',family:'electric',icon:'╱',color:'#9ee6ff',damage:95,cooldown:3.6,range:980,active:18,desc:'Charges a precise beam that pierces every hull in its path.',ability:'Charge a heavy lance through an entire formation.',model:'rail'},
+ vortex:{name:'Strudelkern',subtitle:'Gravity-well projector',slot:'DORSAL',family:'electric',icon:'◎',color:'#b99af1',damage:19,cooldown:4.8,range:620,active:21,desc:'Deploys a persistent vortex that pulls enemies into its center.',ability:'Create a larger, stronger gravity well for five seconds.',model:'vortex'},
+ flame:{name:'Glutstrom',subtitle:'Hydrothermal flame projector',slot:'PORT',family:'thermal',icon:'♨',color:'#ffac74',damage:13,cooldown:.34,range:260,active:16,desc:'Sweeps a close cone of superheated brine. Targets keep burning.',ability:'Vent a broad thermal surge that ignites an enemy pack.',model:'flame'},
+ sonic:{name:'Schallbrecher',subtitle:'Resonant pressure-wave organ',slot:'STARBOARD',family:'sonic',icon:')))',color:'#aaeacb',damage:47,cooldown:3.1,range:470,active:19,desc:'Expanding pressure waves hit each enemy once and push it back.',ability:'Release three overlapping shock rings.',model:'sonic'}
 };
-const RARITIES={common:{name:'STANDARD',color:'#a9b7b3',factor:1,weight:58},uncommon:{name:'REFINED',color:'#87d6b6',factor:1.45,weight:27},rare:{name:'EXCEPTIONAL',color:'#8ebdea',factor:2,weight:12},legendary:{name:'MASTERWORK',color:'#e9bb71',factor:3,weight:3}};
+const RARITY_ORDER=['common','rare','epic','legendary','universe'];
+const RARITIES={common:{name:'COMMON',color:'#a9b7b3',factor:1,weight:60},rare:{name:'RARE',color:'#8bbfee',factor:2,weight:25},epic:{name:'EPIC',color:'#c392ed',factor:3,weight:11},legendary:{name:'LEGENDARY',color:'#f4c667',factor:5,weight:3.7},universe:{name:'UNIVERSE',color:'#d6f8ff',factor:9,weight:.3},uncommon:{name:'RARE',color:'#8bbfee',factor:1.45,weight:0,legacy:true}};
+const BASE_WEAPONS=['torpedo','arc','flak','mortar','mines','harpoon','drone','cryo'];
+const normalizeRarity=key=>key==='uncommon'?'rare':RARITY_ORDER.includes(key)?key:'common';
+const ENEMIES={
+ shoal:{name:'Leuchtfisch',english:'Lantern shoal'},scout:{name:'Späher',english:'Scout'},rammer:{name:'Rammboot',english:'Ram boat'},gunner:{name:'Kanonenboot',english:'Gunboat'},fort:{name:'Seefeste',english:'Sea fortress'},elite:{name:'Admiralsschiff',english:'Admiral'},boss:{name:'Wächter',english:'Guardian'},
+ minelayer:{name:'Sperrleger',english:'Minelayer',desc:'Circles your route and leaves mines that arm after 1.3 seconds.'},
+ sniper:{name:'Nadeljäger',english:'Sniper',desc:'Locks a visible firing lane for 1.4 seconds before its high-speed shot.'},
+ carrier:{name:'Schwarmträger',english:'Carrier',desc:'Opens its bays before launching up to four fast interceptors.'},
+ leech:{name:'Saugdrohne',english:'Leech',desc:'Latches onto the citadel and drains energy. Boost or sonar shakes it free.'}
+};
 const ARTIFACTS={
- amberLedger:{name:'Bernsteinbuch',english:'The Amber Ledger',rarity:'uncommon',icon:'▤',desc:'+20% gold income. Every vault also grants 25 gold.',tag:'ECONOMY',effect:{gold:.2,chestGold:25}},
- hanseSeal:{name:'Hanse-Siegel',english:'Seal of the Drowned League',rarity:'rare',icon:'◈',desc:'Every 10 consumed objects creates a 40-gold payout.',tag:'ECONOMY / CONSUME',effect:{consumePay:40}},
- krakenLens:{name:'Krakenauge',english:'The Kraken Lens',rarity:'rare',icon:'◎',desc:'+25% critical chance. Critical hits deal double damage.',tag:'CRITICAL',effect:{crit:.25}},
- thunderBell:{name:'Sturmglocke',english:'Bell of the Sunken Storm',rarity:'rare',icon:'♧',desc:'Electric attacks chain to 2 more targets and deal +20% damage.',tag:'ELECTRIC',effect:{chains:2,electric:.2}},
- volatilePearl:{name:'Zornperle',english:'The Volatile Pearl',rarity:'rare',icon:'●',desc:'Torpedo impacts explode in a 75m radius.',tag:'TORPEDO / EXPLOSIVE',effect:{torpedoBlast:75}},
+ amberLedger:{name:'Bernsteinbuch',english:'The Amber Ledger',rarity:'rare',icon:'▤',desc:'+20% gold income. Every vault also grants 25 gold.',tag:'ECONOMY',effect:{gold:.2,chestGold:25}},
+ hanseSeal:{name:'Hanse-Siegel',english:'Seal of the Drowned League',rarity:'epic',icon:'◈',desc:'Every 10 consumed objects creates a 40-gold payout.',tag:'ECONOMY / CONSUME',effect:{consumePay:40}},
+ krakenLens:{name:'Krakenauge',english:'The Kraken Lens',rarity:'epic',icon:'◎',desc:'+25% critical chance. Critical hits deal double damage.',tag:'CRITICAL',effect:{crit:.25}},
+ thunderBell:{name:'Sturmglocke',english:'Bell of the Sunken Storm',rarity:'epic',icon:'♧',desc:'Electric attacks chain to 2 more targets and deal +20% damage.',tag:'ELECTRIC',effect:{chains:2,electric:.2}},
+ volatilePearl:{name:'Zornperle',english:'The Volatile Pearl',rarity:'epic',icon:'●',desc:'Torpedo impacts explode in a 75m radius.',tag:'TORPEDO / EXPLOSIVE',effect:{torpedoBlast:75}},
  saltCrown:{name:'Salzkrone',english:'Crown of Salt',rarity:'legendary',icon:'♜',desc:'Defeated enemies explode for 35 damage. Explosions can chain.',tag:'CHAIN REACTION',effect:{deathBlast:35}},
  abyssHeart:{name:'Abgrundherz',english:'Heart of the Abyss',rarity:'legendary',icon:'♥',desc:'Survive a fatal hit once with 45% hull and a massive sonar burst.',tag:'SECOND CHANCE',effect:{revives:1}},
  salvageMagnet:{name:'Nordmagnet',english:'Northbound Magnet',rarity:'common',icon:'⌁',desc:'+100m salvage reach. Collecting gold heals 0.1 hull.',tag:'SALVAGE / SUSTAIN',effect:{magnet:100,goldHeal:.1}},
- pressureDial:{name:'Druckmesser',english:'The Forbidden Gauge',rarity:'uncommon',icon:'◴',desc:'Automatic cooldowns are 14% shorter.',tag:'ATTACK RATE',effect:{haste:.14}},
- masterKey:{name:'Werftschlüssel',english:'The Shipwright’s Key',rarity:'uncommon',icon:'⚿',desc:'Two free rerolls in every draft. Gold upgrade prices are 15% lower.',tag:'DRAFT / ECONOMY',effect:{rerolls:2,discount:.15}},
+ pressureDial:{name:'Druckmesser',english:'The Forbidden Gauge',rarity:'rare',icon:'◴',desc:'Automatic cooldowns are 14% shorter.',tag:'ATTACK RATE',effect:{haste:.14}},
+ masterKey:{name:'Werftschlüssel',english:'The Shipwright’s Key',rarity:'rare',icon:'⚿',desc:'Two free rerolls in every draft. Gold upgrade prices are 15% lower.',tag:'DRAFT / ECONOMY',effect:{rerolls:2,discount:.15}},
  echoMirror:{name:'Echospiegel',english:'The Echo Mirror',rarity:'legendary',icon:'◇',desc:'The next artifact you recover has double strength.',tag:'ARTIFACT AMPLIFIER',effect:{nextDouble:1}},
- coralOath:{name:'Koralleneid',english:'Oath of Living Coral',rarity:'uncommon',icon:'✚',desc:'+0.9 hull regeneration per second. Repairs grant 5 seconds of shielding.',tag:'SUSTAIN',effect:{regen:.9,repairShield:5}},
+ coralOath:{name:'Koralleneid',english:'Oath of Living Coral',rarity:'rare',icon:'✚',desc:'+0.9 hull regeneration per second. Repairs grant 5 seconds of shielding.',tag:'SUSTAIN',effect:{regen:.9,repairShield:5}},
  jetValve:{name:'Sturmventil',english:'Storm-Tide Valve',rarity:'common',icon:'»',desc:'Overdrive consumes 25% less energy and grants +20% ramming damage.',tag:'OVERDRIVE',effect:{boostSave:.25,ram:.2}},
- whiteAnchor:{name:'Weißer Anker',english:'Anchor of the Last Harbor',rarity:'rare',icon:'⚓',desc:'+60 maximum hull. At less than 30% hull, gain 35% damage.',tag:'LAST STAND',effect:{hp:60,lastStand:.35}},
- frostStar:{name:'Froststern',english:'Star of the Frozen Trench',rarity:'rare',icon:'❄',desc:'Frozen targets take +35% damage from all weapons.',tag:'CRYO SYNERGY',effect:{shatter:.35}},
- gildedFuse:{name:'Goldene Lunte',english:'The Gilded Fuse',rarity:'uncommon',icon:'✹',desc:'Explosive kills drop 3 extra gold. Explosions are 20% wider.',tag:'EXPLOSIVE / GOLD',effect:{blastGold:3,blastRadius:.2}},
- huntsmanClock:{name:'Jägeruhr',english:'The Hunter’s Clock',rarity:'rare',icon:'◷',desc:'Every 12 kills resets all active weapon cooldowns.',tag:'ABILITY ENGINE',effect:{killReset:12}},
- torpedoGyro:{name:'Kreiselkompass',english:'Gyroscopic Compass',rarity:'uncommon',icon:'⊕',desc:'Homing torpedoes turn faster and gain one additional projectile.',tag:'TORPEDO',effect:{extraTorpedo:1}},
+ whiteAnchor:{name:'Weißer Anker',english:'Anchor of the Last Harbor',rarity:'epic',icon:'⚓',desc:'+60 maximum hull. At less than 30% hull, gain 35% damage.',tag:'LAST STAND',effect:{hp:60,lastStand:.35}},
+ frostStar:{name:'Froststern',english:'Star of the Frozen Trench',rarity:'epic',icon:'❄',desc:'Frozen targets take +35% damage from all weapons.',tag:'CRYO SYNERGY',effect:{shatter:.35}},
+ gildedFuse:{name:'Goldene Lunte',english:'The Gilded Fuse',rarity:'rare',icon:'✹',desc:'Explosive kills drop 3 extra gold. Explosions are 20% wider.',tag:'EXPLOSIVE / GOLD',effect:{blastGold:3,blastRadius:.2}},
+ huntsmanClock:{name:'Jägeruhr',english:'The Hunter’s Clock',rarity:'epic',icon:'◷',desc:'Every 12 kills resets all active weapon cooldowns.',tag:'ABILITY ENGINE',effect:{killReset:12}},
+ torpedoGyro:{name:'Kreiselkompass',english:'Gyroscopic Compass',rarity:'rare',icon:'⊕',desc:'Homing torpedoes turn faster and gain one additional projectile.',tag:'TORPEDO',effect:{extraTorpedo:1}},
  diversMedal:{name:'Taucherorden',english:'Order of the Deep',rarity:'common',icon:'✥',desc:'Every consumed object restores 2 hull. +10% growth experience.',tag:'CONSUME / GROW',effect:{consumeHeal:2,xp:.1}},
- bronzeLung:{name:'Bronzelunge',english:'The Bronze Lung',rarity:'uncommon',icon:'≋',desc:'+30 maximum overdrive energy. Active cooldowns run 20% faster while boosting.',tag:'ABILITY / OVERDRIVE',effect:{energy:30,boostHaste:.2}},
- droneHive:{name:'Bienenkorb',english:'The Brass Beehive',rarity:'rare',icon:'⬡',desc:'Add two drones to the wing. Drones deal 20% more damage.',tag:'DRONE',effect:{drones:2,droneDamage:.2}},
- harpoonChain:{name:'Walfängerkette',english:'The Whaler’s Chain',rarity:'uncommon',icon:'↠',desc:'Harpoons deal +35% damage and pull targets twice as hard.',tag:'HARPOON',effect:{harpoon:.35}},
- salvageChoir:{name:'Tiefenchor',english:'Choir of the Depths',rarity:'rare',icon:'♫',desc:'Sonar pulls every gold pickup within 650m and recharges 25% faster.',tag:'SONAR / SALVAGE',effect:{sonarMagnet:650,sonarHaste:.25}},
+ bronzeLung:{name:'Bronzelunge',english:'The Bronze Lung',rarity:'rare',icon:'≋',desc:'+30 maximum overdrive energy. Active cooldowns run 20% faster while boosting.',tag:'ABILITY / OVERDRIVE',effect:{energy:30,boostHaste:.2}},
+ droneHive:{name:'Bienenkorb',english:'The Brass Beehive',rarity:'epic',icon:'⬡',desc:'Add two drones to the wing. Drones deal 20% more damage.',tag:'DRONE',effect:{drones:2,droneDamage:.2}},
+ harpoonChain:{name:'Walfängerkette',english:'The Whaler’s Chain',rarity:'rare',icon:'↠',desc:'Harpoons deal +35% damage and pull targets twice as hard.',tag:'HARPOON',effect:{harpoon:.35}},
+ salvageChoir:{name:'Tiefenchor',english:'Choir of the Depths',rarity:'epic',icon:'♫',desc:'Sonar pulls every gold pickup within 650m and recharges 25% faster.',tag:'SONAR / SALVAGE',effect:{sonarMagnet:650,sonarHaste:.25}},
  finalDividend:{name:'Letzte Dividende',english:'The Final Dividend',rarity:'legendary',icon:'✦',desc:'Gain 1% damage for every 25 gold carried, up to +80%. Gain 100 gold now.',tag:'ECONOMY / DAMAGE',effect:{goldDamage:.01,grantGold:100}}
 };
 // Five purchased improvements earn a permanent, mutually exclusive specialization for that module.
@@ -61,7 +75,11 @@ const EVOLUTIONS={
  mines:[{id:'anchor',name:'Ankerminen',desc:'Mines detect targets farther away and explode across a 210m radius.'},{id:'chain',name:'Kettenzündung',desc:'Mine explosions launch six piercing shrapnel bolts. Active field lays twelve mines.'}],
  harpoon:[{id:'trident',name:'Dreizack',desc:'Three additional piercing harpoons in every volley and active fan.'},{id:'whale',name:'Walbrecher',desc:'Harpoons deal double damage against enemies above half hull integrity.'}],
  drone:[{id:'queen',name:'Schwarmkönigin',desc:'Three additional combat drones. Overclock lasts twelve seconds.'},{id:'rescue',name:'Rettungsflotte',desc:'Drone hits repair 0.8 hull. Drones deal 30% more damage.'}],
- cryo:[{id:'zero',name:'Nullpunkt',desc:'Freeze radius grows by 80m. Automatic frost briefly stuns enemies.'},{id:'crystal',name:'Kristallbruch',desc:'Frozen enemies shatter on defeat, dealing 65 damage in a 130m radius.'}]
+ cryo:[{id:'zero',name:'Nullpunkt',desc:'Freeze radius grows by 80m. Automatic frost briefly stuns enemies.'},{id:'crystal',name:'Kristallbruch',desc:'Frozen enemies shatter on defeat, dealing 65 damage in a 130m radius.'}],
+ rail:[{id:'longshot',name:'Horizontspalter',desc:'Rail lances travel 35% farther and deal 45% more damage.'},{id:'echo',name:'Nachbrenner',desc:'Every rail lance fires a second echo beam after 0.28 seconds at 60% power.'}],
+ vortex:[{id:'singularity',name:'Singularität',desc:'Gravity wells grow by 70m and pull 60% harder.'},{id:'collapse',name:'Kollapskern',desc:'Each expired gravity well collapses into a blast dealing 3.3 times its tick damage.'}],
+ flame:[{id:'wildfire',name:'Kettenbrand',desc:'Burning wrecks spread their fire to enemies within 150m.'},{id:'whiteheat',name:'Weißglut',desc:'Thermal attacks deal 45% more damage. Burning targets take 25% more damage from all weapons.'}],
+ sonic:[{id:'resonance',name:'Rückhall',desc:'Pressure rings contract for a second hit after reaching their maximum radius.'},{id:'breaker',name:'Panzerbrecher',desc:'Pressure waves stun for 0.6 seconds and deal 50% more damage to forts and guardians.'}]
 };
 const PRESSURES={
  survey:{name:'Erkundung',english:'Survey',desc:'Standard expedition. Learn the currents and build something outrageous.',hp:1,damage:1,speed:1,reward:1},
@@ -80,5 +98,5 @@ const BIOMES=[
  {name:'Der Eisenfriedhof',english:'The Iron Graveyard',depth:1540,color:0x173444,fog:0x122f43,sand:0x35424c,boss:'Die Rostkönigin',bossAt:165,bossHP:4800,desc:'A fleet of drowned factories. Rich cargo lies among the pressure mines.'},
  {name:'Der Schwarze Graben',english:'The Black Trench',depth:2700,color:0x101e35,fog:0x111c32,sand:0x252d43,boss:'Der Tiefenfürst',bossAt:180,bossHP:8500,desc:'Geothermal vents light the last descent. The sovereign of the abyss awaits.'}
 ];
-scope.UBContent={HULLS,CAPTAINS,CREWS,WEAPONS,RARITIES,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
+scope.UBContent={HULLS,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,ENEMIES,normalizeRarity,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
 })(typeof window!=='undefined'?window:globalThis);

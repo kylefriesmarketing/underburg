@@ -1,5 +1,5 @@
 {
-  "version": "0.5",
+  "version": "0.6",
   "files": [
     "index.html",
     "ui.css",
@@ -14,6 +14,12 @@
     "campaign-data.js",
     "atlas.js",
     "atlas.css",
+    "harbor-data.js",
+    "harbor.js",
+    "harbor.css",
+    "expansion.css",
+    "ship-livery.js",
+    "combat-fx.js",
     "LICENSES.md",
     "assets/lib/BufferGeometryUtils.js",
     "assets/lib/GLTFLoader.js",
@@ -24,6 +30,11 @@
     "assets/models/coral.glb",
     "assets/models/corsair.glb",
     "assets/models/dreadnought.glb",
+    "assets/models/enemy-carrier.glb",
+    "assets/models/enemy-leech.glb",
+    "assets/models/enemy-minelayer.glb",
+    "assets/models/enemy-sniper.glb",
+    "assets/models/expansion-manifest.json",
     "assets/models/fan.glb",
     "assets/models/kelp.glb",
     "assets/models/manifest.json",
@@ -32,13 +43,17 @@
     "assets/models/module-cryo.glb",
     "assets/models/module-drone.glb",
     "assets/models/module-flak.glb",
+    "assets/models/module-flame.glb",
     "assets/models/module-harpoon.glb",
     "assets/models/module-mines.glb",
     "assets/models/module-mortar.glb",
+    "assets/models/module-rail.glb",
     "assets/models/module-repair.glb",
     "assets/models/module-salvage.glb",
     "assets/models/module-sonar.glb",
+    "assets/models/module-sonic.glb",
     "assets/models/module-torpedo.glb",
+    "assets/models/module-vortex.glb",
     "assets/models/nautilus.glb",
     "assets/models/relic-abyssHeart.glb",
     "assets/models/relic-amberLedger.glb",
@@ -84,5 +99,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 12170854
+  "bytes": 13852411
 }

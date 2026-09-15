@@ -1,0 +1,112 @@
+#harbor-screen{position:fixed;inset:0;z-index:12;color:#e0eee8;pointer-events:none;font-family:var(--sans,'Arial',sans-serif)}
+#harbor-screen.hidden{display:none}
+.harbor-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,20,24,.96) 0%,rgba(4,20,24,.91) 44%,rgba(4,20,24,.34) 70%,rgba(4,20,24,.08)),linear-gradient(0deg,rgba(3,18,23,.9),transparent 40%)}
+.harbor-panel{position:absolute;top:99px;bottom:26px;left:40px;width:min(760px,58vw);display:flex;flex-direction:column;pointer-events:auto;min-height:0}
+.harbor-top{flex:none;padding-bottom:12px}
+.harbor-title-row{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.harbor-title-row .eyebrow{font-size:9px;letter-spacing:.2em;color:#94b9ad}
+.harbor-title-row h1{font:500 clamp(23px,2.15vw,34px)/1.15 Georgia,serif;letter-spacing:-.03em;margin:10px 0 0;color:#f1eee1}
+.harbor-title-row h1 em{color:#d9bc76;font-weight:400}
+#harbor-screen button{font:600 10px/1.25 var(--sans,'Arial',sans-serif);letter-spacing:.08em;cursor:pointer;color:#c9ddd4;border:1px solid #36534e;background:rgba(12,33,35,.76);min-height:40px;border-radius:2px;transition:background .14s,border-color .14s,color .14s}
+#harbor-screen button:hover:not(:disabled){color:#efffe9;border-color:#b7cfac;background:#203f3d}
+#harbor-screen button:focus-visible{outline:2px solid #99f4d0;outline-offset:3px}
+#harbor-screen button:disabled{cursor:default;opacity:.5}
+#harbor-screen .harbor-close{flex:none;padding:0 13px;color:#c4c7b4;font-size:9px;min-width:89px}
+.harbor-wallet{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;margin-bottom:13px;padding:10px 0;border-top:1px solid #38514a;border-bottom:1px solid #38514a}
+.harbor-wallet>span{display:flex;align-items:center;gap:13px;font-size:9px;letter-spacing:.16em;color:#a6bbaf}
+.harbor-wallet strong{font:500 23px/1 Georgia,serif;color:#ece2b9;letter-spacing:0}
+.harbor-wallet small{font-size:8px;letter-spacing:.1em;color:#8eaaa0}
+.harbor-tabs{display:flex;gap:6px}
+#harbor-screen .harbor-tabs button{flex:1;min-height:42px;background:#0b2427;border-color:#2a4944;font-size:9px;position:relative}
+#harbor-screen .harbor-tabs button.active{background:#2c4236;color:#eee1b8;border-color:#9b915f}
+#harbor-screen .harbor-tabs button.active:after{content:'';position:absolute;left:25%;right:25%;bottom:-1px;height:2px;background:#ddbd72}
+.harbor-scroller{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1;padding:0 10px 8px 0;scrollbar-width:thin;scrollbar-color:#52706a #0b2427;overscroll-behavior:contain}
+.harbor-intro{font-size:11px;line-height:1.6;color:#94b1a8;margin:3px 0 13px;max-width:620px}
+.harbor-filters{display:flex;gap:5px;margin-bottom:13px}
+#harbor-screen .harbor-filters button{padding:0 12px;min-height:34px;font-size:8px;border-color:#294841;background:transparent;color:#99b4a7}
+#harbor-screen .harbor-filters button.active{color:#eddfb9;border-color:#7e7e56;background:#283a31}
+.harbor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch}
+.harbor-card{background:linear-gradient(145deg,rgba(19,44,43,.96),rgba(9,29,33,.95));border:1px solid #35544c;display:flex;flex-direction:column;min-width:0;position:relative;overflow:hidden;border-radius:3px}
+.harbor-card.equipped{border-color:#b3a268;box-shadow:inset 0 0 25px rgba(202,177,94,.07)}
+.harbor-card.locked{border-color:#294540}
+.harbor-portrait,.harbor-emblem{height:110px;flex:none;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 65%,#284a44,transparent 70%);position:relative;overflow:hidden;border-bottom:1px solid #263e3b}
+.harbor-portrait[style]{background:radial-gradient(ellipse at 50% 65%,color-mix(in srgb,var(--paint) 75%,transparent),transparent 70%)}
+.harbor-portrait img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 8px #001416);opacity:.96}
+.harbor-portrait[style]:after{content:'';position:absolute;left:14px;right:14px;bottom:0;height:2px;background:var(--accent);opacity:.65}
+.harbor-portrait>span,.harbor-emblem{font-size:48px;color:#e0c780;text-shadow:0 4px 14px #011616}
+.harbor-card-body{padding:12px 12px 5px;flex:1}
+.harbor-card-category{display:block;font-size:7px;letter-spacing:.11em;color:#7fac9a;line-height:1.5}
+.harbor-card-category b{display:block;color:#b9b486;font-weight:500;letter-spacing:.07em;margin-top:3px;font-size:7px}
+.harbor-card h3,.harbor-achievement h3{font:500 19px/1.13 Georgia,serif;margin:9px 0 4px;color:#ece7d5;overflow-wrap:anywhere}
+.harbor-item-english{font-size:9px;color:#9dbbad;line-height:1.4;display:block}
+.harbor-card p,.harbor-achievement p{font-size:10px;line-height:1.55;color:#a8c0b5;margin:10px 0 7px}
+.harbor-swatches{display:flex;gap:4px;margin:9px 0 0}
+.harbor-swatches i{display:block;width:17px;height:6px;border:1px solid rgba(255,255,255,.15)}
+.harbor-requirement{margin:12px 0 7px;padding-top:8px;border-top:1px solid #365049;font-size:9px;color:#c8bb8e;line-height:1.4}
+.harbor-requirement small{display:block;font-size:9px;color:#879f95;margin-top:4px}
+#harbor-screen .harbor-card>button{margin:7px 10px 10px;padding:9px 5px;font-size:8px;min-height:41px;letter-spacing:.06em}
+#harbor-screen .harbor-card.equipped>button{opacity:1;background:#324737;border-color:#776f4c;color:#d5c188}
+.harbor-preview{position:absolute;right:4.5vw;bottom:55px;width:min(350px,29vw);text-align:center;color:#d6e5dc;pointer-events:none}
+.harbor-preview>.eyebrow{font-size:8px;letter-spacing:.18em;color:#91b5a8}
+.harbor-preview h2{font:500 32px/1.1 Georgia,serif;margin:12px 0 7px;color:#f1e9cf}
+.harbor-preview>p{font-size:11px;margin:0 0 20px;color:#c1c5a6}
+#harbor-preview-fitting{padding:15px;border-top:1px solid #587067;border-bottom:1px solid #587067;background:linear-gradient(90deg,transparent,rgba(5,27,30,.8),transparent)}
+#harbor-preview-fitting>span{display:block;font-size:8px;letter-spacing:.16em;color:#92b5a9}
+#harbor-preview-fitting strong{font:400 22px/1.2 Georgia,serif;display:block;color:#d9c58c;margin:7px 0}
+#harbor-preview-fitting p{font-size:10px;line-height:1.6;max-width:270px;margin:0 auto;color:#a5bfb3}
+.harbor-preview>small{font-size:8px;line-height:1.5;color:#78978b;display:block;margin:11px 0 0}
+.harbor-achievements{grid-template-columns:repeat(2,minmax(0,1fr))}
+.harbor-achievement{padding:18px;background:linear-gradient(145deg,#102d2e,#0c2226);border:1px solid #36524a;border-radius:3px;position:relative;overflow:hidden}
+.harbor-achievement.earned{border-color:#8b8259;background:linear-gradient(145deg,#263d31,#102b2b)}
+.harbor-honor-icon{float:right;font-size:27px;color:#647f6f;line-height:1}
+.harbor-achievement.earned .harbor-honor-icon{color:#e5c47c;text-shadow:0 0 15px #8e884866}
+.harbor-achievement h3{font-size:23px;min-height:26px;margin-top:12px}
+.harbor-achievement p{min-height:32px}
+.harbor-progress{height:4px;background:#2e4840;margin-top:18px;overflow:hidden}
+.harbor-progress i{display:block;height:100%;background:linear-gradient(90deg,#6caa8a,#d7bc75)}
+.harbor-progress-count{font-size:9px;color:#a4c0b3;text-align:right;margin-top:6px}
+.harbor-honor-reward{display:flex;flex-direction:column;gap:4px;padding-top:12px;margin-top:11px;border-top:1px solid #3c5145}
+.harbor-honor-reward small{font-size:7px;letter-spacing:.13em;color:#a29871}
+.harbor-honor-reward strong{font:500 17px/1.2 Georgia,serif;color:#ddd1a7}
+.harbor-honor-reward span{font-size:7px;letter-spacing:.12em;color:#829c8e}
+#harbor-message{position:absolute;right:28px;bottom:25px;max-width:340px;padding:15px 20px;background:#173b33;border:1px solid #a19b69;color:#eae0bd;box-shadow:0 8px 25px #06191acc;font-size:12px;line-height:1.5;opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s;pointer-events:none}
+#harbor-message.visible{opacity:1;transform:none}
+@media(max-width:1200px){.harbor-panel{width:57vw;left:30px}.harbor-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.harbor-portrait,.harbor-emblem{height:115px}.harbor-preview{right:3vw;width:32vw}.harbor-title-row h1{font-size:27px}}
+@media(max-width:700px){
+ .harbor-shade{background:linear-gradient(180deg,rgba(4,20,24,.92) 0%,rgba(4,20,24,.6) 19%,rgba(4,20,24,.04) 34%,rgba(4,20,24,.6) 48%,rgba(4,20,24,.95) 68%)}
+ .harbor-panel{inset:0;width:auto;display:block;pointer-events:none}
+ .harbor-top{position:absolute;left:18px;right:18px;top:82px;padding:0;pointer-events:auto}
+ .harbor-title-row{gap:12px;min-height:30px}
+ .harbor-title-row .eyebrow{font-size:8px;letter-spacing:.1em;line-height:1.5;max-width:170px;display:block}
+ .harbor-title-row h1{display:none}
+ #harbor-screen .harbor-close{font-size:8px;min-height:32px;padding:0 9px;min-width:76px}
+ .harbor-wallet{margin:7px 0 9px;padding:7px 0;border-bottom:0;border-top:1px solid #486258}
+ .harbor-wallet>span{font-size:8px;letter-spacing:.1em;gap:10px}
+ .harbor-wallet strong{font-size:21px}
+ .harbor-wallet small{font-size:7px;letter-spacing:.04em}
+ #harbor-screen .harbor-tabs button{font-size:8px;letter-spacing:.06em;min-height:38px}
+ .harbor-scroller{position:absolute;top:43vh;bottom:14px;left:12px;right:12px;overflow:auto;padding:12px 10px 16px;background:linear-gradient(160deg,rgba(9,30,32,.96),rgba(5,23,28,.98));border:1px solid #496357;border-top-color:#9c9863;border-radius:7px 7px 3px 3px;pointer-events:auto;box-shadow:0 -10px 30px rgba(3,17,23,.12)}
+ .harbor-intro{font-size:10px;line-height:1.5;margin:0 0 10px}
+ .harbor-filters{gap:4px;flex-wrap:wrap;margin-bottom:10px}
+ #harbor-screen .harbor-filters button{font-size:7px;padding:0 7px;min-height:34px;flex:1;white-space:nowrap}
+ .harbor-grid{gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .harbor-portrait,.harbor-emblem{height:92px}
+ .harbor-emblem{font-size:40px}
+ .harbor-card-body{padding:10px 9px 3px}
+ .harbor-card-category,.harbor-card-category b{font-size:6px;letter-spacing:.06em}
+ .harbor-card h3{font-size:18px;margin-top:8px}
+ .harbor-item-english{font-size:8px}
+ .harbor-card p{font-size:9px;line-height:1.5}
+ .harbor-requirement,.harbor-requirement small{font-size:8px}
+ #harbor-screen .harbor-card>button{min-height:44px;font-size:7px;margin:7px 7px 8px;padding:8px 3px}
+ .harbor-preview{display:none}
+ .harbor-achievements{grid-template-columns:1fr}
+ .harbor-achievement{padding:16px}
+ .harbor-achievement h3{font-size:24px;margin-top:9px}
+ .harbor-achievement p{min-height:0;font-size:10px}
+ .harbor-progress{margin-top:12px}
+ .harbor-honor-reward{margin-top:8px;padding-top:10px}
+ #harbor-message{left:22px;right:22px;bottom:23px;max-width:none;font-size:11px;padding:12px 15px}
+}
+@media(max-width:700px) and (max-height:700px){.harbor-top{top:70px}.harbor-wallet{margin:4px 0 6px;padding:5px 0}.harbor-scroller{top:43vh}.harbor-intro{font-size:9px}.harbor-portrait,.harbor-emblem{height:80px}}
+@media(prefers-reduced-motion:reduce){#harbor-screen button,#harbor-message{transition:none}}

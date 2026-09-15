@@ -1,0 +1,194 @@
+{
+  "module-rail": {
+    "file": "module-rail.glb",
+    "triangles": 1180,
+    "meshes": 5,
+    "bytes": 64492,
+    "bounds": {
+      "min": [
+        -0.87,
+        0.0,
+        -0.82
+      ],
+      "max": [
+        2.213,
+        1.4,
+        0.82
+      ]
+    },
+    "dimensions": [
+      3.083,
+      1.4,
+      1.64
+    ],
+    "description": "Donnerschiene: paired long magnetic rails, porcelain capacitor banks and glacial blue charge channels."
+  },
+  "module-vortex": {
+    "file": "module-vortex.glb",
+    "triangles": 1660,
+    "meshes": 5,
+    "bytes": 99780,
+    "bounds": {
+      "min": [
+        -0.965,
+        0.0,
+        -0.965
+      ],
+      "max": [
+        0.965,
+        2.347,
+        0.965
+      ]
+    },
+    "dimensions": [
+      1.93,
+      2.347,
+      1.93
+    ],
+    "description": "Wirbelherz: open nine-vane turbine, suspended mint pressure pearl and magnetic gyroscope."
+  },
+  "module-flame": {
+    "file": "module-flame.glb",
+    "triangles": 2204,
+    "meshes": 4,
+    "bytes": 136420,
+    "bounds": {
+      "min": [
+        -0.82,
+        0.0,
+        -0.82
+      ],
+      "max": [
+        1.76,
+        1.66,
+        0.82
+      ]
+    },
+    "dimensions": [
+      2.58,
+      1.66,
+      1.64
+    ],
+    "description": "Glutwerfer: twin superheated brine tanks feeding finned thermal projector nozzles."
+  },
+  "module-sonic": {
+    "file": "module-sonic.glb",
+    "triangles": 1940,
+    "meshes": 5,
+    "bytes": 115264,
+    "bounds": {
+      "min": [
+        -0.82,
+        0.0,
+        -0.865
+      ],
+      "max": [
+        1.075,
+        2.065,
+        0.865
+      ]
+    },
+    "dimensions": [
+      1.895,
+      2.065,
+      1.73
+    ],
+    "description": "Glockenschall: three open brass resonance bells with luminous membranes and porcelain bindings."
+  },
+  "enemy-minelayer": {
+    "file": "enemy-minelayer.glb",
+    "triangles": 7572,
+    "meshes": 5,
+    "bytes": 394408,
+    "bounds": {
+      "min": [
+        -4.55,
+        0.1,
+        -2.8
+      ],
+      "max": [
+        4.55,
+        4.23,
+        2.8
+      ]
+    },
+    "dimensions": [
+      9.1,
+      4.13,
+      5.6
+    ],
+    "description": "Minenleger: broad stern chutes with six spiked contact mines, gantry and forward bridge."
+  },
+  "enemy-sniper": {
+    "file": "enemy-sniper.glb",
+    "triangles": 5840,
+    "meshes": 7,
+    "bytes": 333352,
+    "bounds": {
+      "min": [
+        -4.6,
+        0.16,
+        -2.35
+      ],
+      "max": [
+        6.035,
+        4.06,
+        2.35
+      ]
+    },
+    "dimensions": [
+      10.635,
+      3.9,
+      4.7
+    ],
+    "description": "Fernjaeger: low Prussian-blue hull, swept fins and long paired magnetic bow cannon."
+  },
+  "enemy-carrier": {
+    "file": "enemy-carrier.glb",
+    "triangles": 5316,
+    "meshes": 5,
+    "bytes": 296392,
+    "bounds": {
+      "min": [
+        -4.63,
+        0.14,
+        -2.77
+      ],
+      "max": [
+        4.63,
+        4.15,
+        2.77
+      ]
+    },
+    "dimensions": [
+      9.26,
+      4.01,
+      5.54
+    ],
+    "description": "Drohnenwerft: twin pressure pontoons, wide flight deck, open hangar, diving drones and recovery crane."
+  },
+  "enemy-leech": {
+    "file": "enemy-leech.glb",
+    "triangles": 2984,
+    "meshes": 4,
+    "bytes": 157892,
+    "bounds": {
+      "min": [
+        -3.58,
+        0.17,
+        -2.668
+      ],
+      "max": [
+        3.684,
+        2.317,
+        2.668
+      ]
+    },
+    "dimensions": [
+      7.264,
+      2.147,
+      5.336
+    ],
+    "description": "Saugkaefer: limpet hull with six grappling legs, mandibles, exposed mint reservoirs and siphon mouth."
+  }
+}
