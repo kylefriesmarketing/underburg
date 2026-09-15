@@ -1,5 +1,5 @@
 {
-  "version": "0.12",
+  "version": "0.13",
   "files": [
     "index.html",
     "ui.css",
@@ -33,6 +33,8 @@
     "armory-visuals.js",
     "guardian-fx.js",
     "world-dioramas.js",
+    "graphics-settings.js",
+    "graphics-settings.css",
     "LICENSES.md",
     "assets/lib/BufferGeometryUtils.js",
     "assets/lib/GLTFLoader.js",
@@ -160,5 +162,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 23979515
+  "bytes": 24010317
 }

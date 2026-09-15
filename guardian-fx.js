@@ -11,7 +11,7 @@ const damageStage=ratio=>ratio<=.15?3:ratio<=.35?2:ratio<=.65?1:0;
 /** Live damage follows HP; collapse owns visuals only and never retains a simulated enemy. */
 export class GuardianFX{
  constructor(view){this.view=view;this.live=new Map();this.collapses=[];this.clock=0;this.defeats=0;this.released=0;this.buckles=0;this.tempColor=new THREE.Color();}
- cue(type,record,stage){this.view.onGuardianCue?.({type,id:record.id,role:record.role,stage,x:record.x,y:record.y});}
+ cue(type,record,stage){this.view.guardianCue({type,id:record.id,role:record.role,stage,x:record.x,y:record.y});}
  ownMaterials(root,role){
   const cache=new Map(),entries=[],owned=[];root.traverse(o=>{
    if(!o.material)return;const original=Array.isArray(o.material)?o.material:[o.material];
