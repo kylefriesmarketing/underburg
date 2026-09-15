@@ -1,9 +1,9 @@
 (function(scope){
 'use strict';
 const HULLS={
- nautilus:{name:'Nautilus',title:'DER ENTDECKER',hp:185,speed:173,turn:3.8,magnet:150,color:0x5cacaa,desc:'Balanced explorer. +25% salvage reach. Finds opportunity in every ruin.'},
- bastion:{name:'Eisenwall',title:'DIE FESTUNG',hp:265,speed:143,turn:2.8,magnet:115,color:0xc1aa80,desc:'Armored citadel. +43% starting hull and stronger ramming. Slow, deliberate, relentless.'},
- wraith:{name:'Nachtjäger',title:'DER JÄGER',hp:145,speed:211,turn:5,magnet:120,color:0x8fbcc7,desc:'Fast hunter. +15% weapon rate. Fragile hull, devastating pursuit.'}
+ nautilus:{radius:30,visualScale:1,name:'Nautilus',title:'DER ENTDECKER',hp:185,speed:173,turn:3.8,magnet:150,color:0x5cacaa,desc:'Balanced explorer. +25% salvage reach. Finds opportunity in every ruin.'},
+ bastion:{radius:40,visualScale:1.28,name:'Eisenwall',title:'DIE FESTUNG',hp:265,speed:143,turn:2.8,magnet:115,color:0xc1aa80,desc:'Armored citadel. +43% starting hull and stronger ramming. Slow, deliberate, relentless.'},
+ wraith:{radius:23,visualScale:.8,name:'Nachtjäger',title:'DER JÄGER',hp:145,speed:211,turn:5,magnet:120,color:0x8fbcc7,desc:'Fast hunter. +15% weapon rate. Fragile hull, devastating pursuit.'}
 };
 const CAPTAINS={
  greta:{name:'Greta Stahl',role:'THE SHIPWRIGHT',icon:'⚒',desc:'+15% maximum hull. Repairs restore 20% more health.',hp:1.15,repair:1.2},
@@ -34,12 +34,26 @@ const RARITIES={common:{name:'COMMON',color:'#a9b7b3',factor:1,weight:60},rare:{
 const BASE_WEAPONS=['torpedo','arc','flak','mortar','mines','harpoon','drone','cryo'];
 const normalizeRarity=key=>key==='uncommon'?'rare':RARITY_ORDER.includes(key)?key:'common';
 const ENEMIES={
- shoal:{name:'Leuchtfisch',english:'Lantern shoal'},scout:{name:'Späher',english:'Scout'},rammer:{name:'Rammboot',english:'Ram boat'},gunner:{name:'Kanonenboot',english:'Gunboat'},fort:{name:'Seefeste',english:'Sea fortress'},elite:{name:'Admiralsschiff',english:'Admiral'},boss:{name:'Wächter',english:'Guardian'},
- minelayer:{name:'Sperrleger',english:'Minelayer',desc:'Circles your route and leaves mines that arm after 1.3 seconds.'},
- sniper:{name:'Nadeljäger',english:'Sniper',desc:'Locks a visible firing lane for 1.4 seconds before its high-speed shot.'},
- carrier:{name:'Schwarmträger',english:'Carrier',desc:'Opens its bays before launching up to four fast interceptors.'},
- leech:{name:'Saugdrohne',english:'Leech',desc:'Latches onto the citadel and drains energy. Boost or sonar shakes it free.'}
+ shoal:{name:'Leuchtfisch',english:'Lantern shoal',desc:'Small schools of luminous fish. Sail through them to gather salvage and experience.',model:null,hp:8,r:8,speed:42,damage:2},
+ scout:{name:'Späher',english:'Scout cutter',desc:'Light patrol boats pursue your citadel. Larger hulls can consume them.',model:'wraith',hp:42,r:24,speed:70,damage:9},
+ rammer:{name:'Rammboot',english:'Ram boat',desc:'An armored bow closes quickly for collision damage. Turn aside before contact.',model:'wraith',hp:85,r:31,speed:92,damage:14},
+ gunner:{name:'Kanonenboot',english:'Gunboat',desc:'Keeps its distance and fires aimed shells. Cross its firing line instead of sailing toward it.',model:'nautilus',hp:105,r:34,speed:54,damage:13},
+ fort:{name:'Seefeste',english:'Sea fortress',desc:'A broad armored fortress with a three-shell fan. Circle outside its guns.',model:'bastion',hp:260,r:46,speed:38,damage:20},
+ elite:{name:'Admiralsschiff',english:'Admiral ship',desc:'An oversized five-gun flagship. Its wreck yields a vault and a mission bounty.',model:'enemy-bellwarden',hp:570,r:58,speed:44,damage:24},
+ boss:{name:'Wächter',english:'Regional guardian',desc:'Three named guardians arrive at 4:00, 7:00, and 9:00. Defeat every guardian in the same mission.',model:'enemy-kaiserburg',hp:3400,r:95,speed:36,damage:28},
+ minelayer:{name:'Sperrleger',english:'Minelayer',desc:'Circles your route and leaves mines that arm after 1.3 seconds. Sonar clears nearby mines.',model:'enemy-minelayer',hp:135,r:35,speed:64,damage:16},
+ sniper:{name:'Nadeljäger',english:'Sniper',desc:'Locks a firing lane for 1.4 seconds. Move sideways before its high-speed shot.',model:'enemy-sniper',hp:85,r:28,speed:53,damage:29},
+ carrier:{name:'Schwarmträger',english:'Carrier',desc:'Opens its bays before launching a bounded wing of small interceptors. Destroy the carrier to stop reinforcements.',model:'enemy-carrier',hp:220,r:45,speed:42,damage:13},
+ leech:{name:'Saugdrohne',english:'Siphon leech',desc:'Latches onto your hull and drains energy. Sustained overdrive or sonar shakes it free.',model:'enemy-leech',hp:28,r:19,speed:142,damage:4},
+ warden:{name:'Schildvogt',english:'Shield warden',desc:'Projects a locked forward shield over nearby escorts, reducing damage by 45%. Flank behind the shield or break it with sonar; guardians are not protected.',model:'enemy-warden',hp:190,r:52,speed:43,damage:16,xp:20,goldDrops:6,goldValue:3},
+ artillery:{name:'Donnerkahn',english:'Depth artillery',desc:'Marks your predicted position before a depth charge lands 1.65 seconds later. Leave the marked circle or interrupt the gunboat with nearby sonar.',model:'enemy-artillery',hp:145,r:48,speed:38,damage:27,xp:22,goldDrops:5,goldValue:3},
+ tender:{name:'Werftdiakon',english:'Repair tender',desc:'Repairs one nearby damaged escort every four seconds. Prioritize the tender; its beam cannot repair guardians or itself.',model:'enemy-tender',hp:125,r:38,speed:52,damage:7,xp:18,goldDrops:5,goldValue:3},
+ kamikaze:{name:'Zündling',english:'Fuse skiff',desc:'A tiny explosive skiff warns for 0.85 seconds, then rushes in a straight line. Dodge sideways or interrupt it with sonar. It cannot be consumed.',model:'enemy-kamikaze',hp:30,r:16,speed:100,damage:34,xp:8,goldDrops:3,goldValue:2}
 };
+const DEFAULT_ENEMY_ROSTER=Object.freeze([
+ ['scout',20,0],['rammer',16,0],['leech',10,18],['sniper',10,28],['gunner',14,30],['minelayer',10,42],['fort',10,65],['carrier',10,65],
+ ['kamikaze',8,75],['warden',8,90],['tender',7,105],['artillery',7,110]
+].map(([kind,weight,from])=>Object.freeze({kind,weight,from})));
 const ARTIFACTS={
  amberLedger:{name:'Bernsteinbuch',english:'The Amber Ledger',rarity:'rare',icon:'▤',desc:'+20% gold income. Every vault also grants 25 gold.',tag:'ECONOMY',effect:{gold:.2,chestGold:25}},
  hanseSeal:{name:'Hanse-Siegel',english:'Seal of the Drowned League',rarity:'epic',icon:'◈',desc:'Every 10 consumed objects creates a 40-gold payout.',tag:'ECONOMY / CONSUME',effect:{consumePay:40}},
@@ -98,5 +112,5 @@ const BIOMES=[
  {name:'Der Eisenfriedhof',english:'The Iron Graveyard',depth:1540,color:0x173444,fog:0x122f43,sand:0x35424c,boss:'Die Rostkönigin',bossAt:165,bossHP:4800,desc:'A fleet of drowned factories. Rich cargo lies among the pressure mines.'},
  {name:'Der Schwarze Graben',english:'The Black Trench',depth:2700,color:0x101e35,fog:0x111c32,sand:0x252d43,boss:'Der Tiefenfürst',bossAt:180,bossHP:8500,desc:'Geothermal vents light the last descent. The sovereign of the abyss awaits.'}
 ];
-scope.UBContent={HULLS,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,ENEMIES,normalizeRarity,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
+scope.UBContent={HULLS,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,ENEMIES,DEFAULT_ENEMY_ROSTER,normalizeRarity,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES};if(typeof module!=='undefined')module.exports=scope.UBContent;
 })(typeof window!=='undefined'?window:globalThis);

@@ -1,0 +1,262 @@
+{
+  "nautilus": {
+    "file": "nautilus.glb",
+    "triangles": 7068,
+    "meshes": 6,
+    "bytes": 412112,
+    "bounds": {
+      "min": [
+        -5.0,
+        0.19,
+        -2.48
+      ],
+      "max": [
+        5.0,
+        5.87,
+        2.48
+      ]
+    },
+    "dimensions": [
+      10.0,
+      5.68,
+      4.96
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Hanseatic merchant fortress: petrol pressure hull, steep red-copper guildhall, stepped gables, twin aft turrets and brass maritime anchor."
+  },
+  "bastion": {
+    "file": "bastion.glb",
+    "triangles": 8122,
+    "meshes": 5,
+    "bytes": 492144,
+    "bounds": {
+      "min": [
+        -4.96,
+        0.1,
+        -2.95
+      ],
+      "max": [
+        5.17,
+        5.8,
+        2.95
+      ]
+    },
+    "dimensions": [
+      10.13,
+      5.7,
+      5.9
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Broad twin-pontoon Prussian fortress: heavy armor belts, four copper-helmed bastions, central keep and armored ram prow."
+  },
+  "wraith": {
+    "file": "wraith.glb",
+    "triangles": 5196,
+    "meshes": 6,
+    "bytes": 314720,
+    "bounds": {
+      "min": [
+        -4.94,
+        0.29,
+        -2.4
+      ],
+      "max": [
+        5.28,
+        4.73,
+        2.4
+      ]
+    },
+    "dimensions": [
+      10.22,
+      4.44,
+      4.8
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Low narrow Gothic hunter: swept diving foils, forked prow, blue lancet windows, low copper roof and slender watch spire."
+  },
+  "enemy-warden": {
+    "file": "enemy-warden.glb",
+    "triangles": 5654,
+    "meshes": 6,
+    "bytes": 339296,
+    "bounds": {
+      "min": [
+        -3.91,
+        0.22,
+        -1.989
+      ],
+      "max": [
+        3.91,
+        4.29,
+        1.989
+      ]
+    },
+    "dimensions": [
+      7.82,
+      4.07,
+      3.978
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Shield escort: convex Gothic bow shield with blue lancets, raised anchor relief and three roofed watch towers."
+  },
+  "enemy-artillery": {
+    "file": "enemy-artillery.glb",
+    "triangles": 5964,
+    "meshes": 6,
+    "bytes": 364924,
+    "bounds": {
+      "min": [
+        -4.77,
+        0.26,
+        -2.28
+      ],
+      "max": [
+        4.77,
+        5.146,
+        2.28
+      ]
+    },
+    "dimensions": [
+      9.54,
+      4.886,
+      4.56
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Siege monitor: long elevated pressure cannon, exposed elevation trunnions, recoil piston and stepped aft guildhouse."
+  },
+  "enemy-tender": {
+    "file": "enemy-tender.glb",
+    "triangles": 6016,
+    "meshes": 6,
+    "bytes": 351416,
+    "bounds": {
+      "min": [
+        -4.23,
+        0.3,
+        -2.137
+      ],
+      "max": [
+        4.23,
+        4.695,
+        2.137
+      ]
+    },
+    "dimensions": [
+      8.46,
+      4.395,
+      4.275
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Repair tender: porcelain hull, glowing brine reservoirs, open repair hoop, twin manipulators and a recovery crane."
+  },
+  "enemy-kamikaze": {
+    "file": "enemy-kamikaze.glb",
+    "triangles": 2316,
+    "meshes": 5,
+    "bytes": 120840,
+    "bounds": {
+      "min": [
+        -2.22,
+        0.08,
+        -1.33
+      ],
+      "max": [
+        2.32,
+        2.21,
+        1.33
+      ]
+    },
+    "dimensions": [
+      4.54,
+      2.13,
+      2.66
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Tiny explosive courier: oversized exposed pressure charge, black safety bands, forward contact fuse and twin rear thrusters."
+  },
+  "enemy-bellwarden": {
+    "file": "enemy-bellwarden.glb",
+    "triangles": 9376,
+    "meshes": 6,
+    "bytes": 559964,
+    "bounds": {
+      "min": [
+        -4.84,
+        0.09,
+        -2.52
+      ],
+      "max": [
+        4.84,
+        7.06,
+        2.52
+      ]
+    },
+    "dimensions": [
+      9.68,
+      6.97,
+      5.04
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Harbor bell guardian: open brass-bell belfry, steep copper helm, armored side towers, flying braces and forward projectors."
+  },
+  "enemy-jagddom": {
+    "file": "enemy-jagddom.glb",
+    "triangles": 7296,
+    "meshes": 7,
+    "bytes": 443820,
+    "bounds": {
+      "min": [
+        -4.82,
+        0.33,
+        -2.52
+      ],
+      "max": [
+        5.457,
+        5.24,
+        2.52
+      ]
+    },
+    "dimensions": [
+      10.277,
+      4.91,
+      5.04
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Asymmetric Gothic hunter: offset watch spire, long port lance, starboard counterweight, swept foils and paired thrust cells."
+  },
+  "enemy-kaiserburg": {
+    "file": "enemy-kaiserburg.glb",
+    "triangles": 11044,
+    "meshes": 6,
+    "bytes": 694200,
+    "bounds": {
+      "min": [
+        -5.05,
+        0.09,
+        -3.073
+      ],
+      "max": [
+        5.05,
+        8.57,
+        3.073
+      ]
+    },
+    "dimensions": [
+      10.1,
+      8.48,
+      6.146
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Three-pontoon cathedral citadel: towering central steeple, twin Gothic gate towers, rose pressure dial, flying buttresses and broadside cannons."
+  }
+}

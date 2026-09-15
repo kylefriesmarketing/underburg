@@ -1,5 +1,5 @@
 {
-  "version": "0.8",
+  "version": "0.9",
   "files": [
     "index.html",
     "ui.css",
@@ -32,12 +32,20 @@
     "assets/models/coral.glb",
     "assets/models/corsair.glb",
     "assets/models/dreadnought.glb",
+    "assets/models/enemy-artillery.glb",
+    "assets/models/enemy-bellwarden.glb",
     "assets/models/enemy-carrier.glb",
+    "assets/models/enemy-jagddom.glb",
+    "assets/models/enemy-kaiserburg.glb",
+    "assets/models/enemy-kamikaze.glb",
     "assets/models/enemy-leech.glb",
     "assets/models/enemy-minelayer.glb",
     "assets/models/enemy-sniper.glb",
+    "assets/models/enemy-tender.glb",
+    "assets/models/enemy-warden.glb",
     "assets/models/expansion-manifest.json",
     "assets/models/fan.glb",
+    "assets/models/fleet-manifest.json",
     "assets/models/kelp.glb",
     "assets/models/manifest.json",
     "assets/models/module-arc.glb",
@@ -101,5 +109,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 13874702
+  "bytes": 15259364
 }

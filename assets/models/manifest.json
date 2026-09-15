@@ -1,21 +1,81 @@
 {
   "nautilus": {
     "file": "nautilus.glb",
-    "triangles": 18468,
-    "meshes": 7,
-    "bytes": 903308
+    "triangles": 7068,
+    "meshes": 6,
+    "bytes": 412112,
+    "bounds": {
+      "min": [
+        -5.0,
+        0.19,
+        -2.48
+      ],
+      "max": [
+        5.0,
+        5.87,
+        2.48
+      ]
+    },
+    "dimensions": [
+      10.0,
+      5.68,
+      4.96
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Hanseatic merchant fortress: petrol pressure hull, steep red-copper guildhall, stepped gables, twin aft turrets and brass maritime anchor."
   },
   "bastion": {
     "file": "bastion.glb",
-    "triangles": 19332,
-    "meshes": 6,
-    "bytes": 925848
+    "triangles": 8122,
+    "meshes": 5,
+    "bytes": 492144,
+    "bounds": {
+      "min": [
+        -4.96,
+        0.1,
+        -2.95
+      ],
+      "max": [
+        5.17,
+        5.8,
+        2.95
+      ]
+    },
+    "dimensions": [
+      10.13,
+      5.7,
+      5.9
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Broad twin-pontoon Prussian fortress: heavy armor belts, four copper-helmed bastions, central keep and armored ram prow."
   },
   "wraith": {
     "file": "wraith.glb",
-    "triangles": 18684,
+    "triangles": 5196,
     "meshes": 6,
-    "bytes": 908104
+    "bytes": 314720,
+    "bounds": {
+      "min": [
+        -4.94,
+        0.29,
+        -2.4
+      ],
+      "max": [
+        5.28,
+        4.73,
+        2.4
+      ]
+    },
+    "dimensions": [
+      10.22,
+      4.44,
+      4.8
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "description": "Low narrow Gothic hunter: swept diving foils, forked prow, blue lancet windows, low copper roof and slender watch spire."
   },
   "corsair": {
     "file": "corsair.glb",

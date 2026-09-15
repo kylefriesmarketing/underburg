@@ -1,11 +1,13 @@
 (function(scope){
 'use strict';
 const C=typeof module!=='undefined'?require('./content.js'):scope.UBContent;
+const K=typeof module!=='undefined'?require('./campaign-data.js'):scope.UBCampaign;
 const LOADOUT_DEFAULTS=Object.freeze({hull:'nautilus',captain:'greta',crew:'divers',weapon:'torpedo',pressure:'survey'});
 const LOADOUT_TYPES=Object.freeze(Object.keys(LOADOUT_DEFAULTS));
 const own=(o,k)=>!!o&&typeof k==='string'&&Object.hasOwn(o,k),num=(v,max=1e9)=>Number.isFinite(v)?Math.max(0,Math.min(max,v)):0;
 const BASE_WEAPONS=['torpedo','arc','flak','mortar','mines','harpoon','drone','cryo'];
-const CAMPAIGN_IDS=['glockenhafen','korallenhof','hansebogen','glasgarten','bernsteinwarte','kaiserwerk','dampfader','eisenglocke','werfttor','schmelzkessel','nachtwarte','schwarzdom','sternenschlund','schattentor','tiefenkrone'];
+const CORE_MISSION_IDS=['glockenhafen','korallenhof','hansebogen','glasgarten','bernsteinwarte','kaiserwerk','dampfader','eisenglocke','werfttor','schmelzkessel','nachtwarte','schwarzdom','sternenschlund','schattentor','tiefenkrone'];
+const CAMPAIGN_IDS=K.NODES.filter(n=>n.kind==='mission').map(n=>n.id);
 const RARITY_ORDER=['COMMON','RARE','EPIC','LEGENDARY','UNIVERSE'];
 const paint=(id,name,english,hull,accent,light,source,price=0)=>({id:'paint-'+id,type:'paint',name,english,desc:'A permanent hull finish with matching metalwork and running lights.',profile:{id,name,hull,accent,light},source,price});
 const emblem=(id,name,english,symbol,source)=>({id:'emblem-'+id,type:'emblem',name,english,desc:'A physical insignia mounted on your citadel.',symbol,source,price:0});
@@ -56,7 +58,7 @@ const ACHIEVEMENTS=[
  {id:'wunderkammer',name:'Wunderkammer',english:'Cabinet of wonders',desc:'Claim a Legendary or Universe reward.',stat:'legendary',target:1,reward:'paint-ivory'},
  {id:'drei-meere',name:'Drei Meere',english:'Three seas',desc:'Win a mission in each of the three sea regions.',stat:'regions',target:3,reward:'weapon-vortex'},
  {id:'hansebrief',name:'Hansebrief',english:'Hanse charter',desc:'Secure five different campaign missions.',stat:'missions',target:5,reward:'paint-royal'},
- {id:'tiefenkaiser',name:'Tiefenkaiser',english:'Emperor of the deep',desc:'Secure all 15 campaign missions.',stat:'missions',target:15,reward:'emblem-crown'}
+ {id:'tiefenkaiser',name:'Tiefenkaiser',english:'Emperor of the deep',desc:'Secure all 15 original sea-chart missions.',stat:'coreMissions',target:15,reward:'emblem-crown'}
 ];
 const ACHIEVEMENT_BY_ID=Object.fromEntries(ACHIEVEMENTS.map(a=>[a.id,a]));
 for(const item of CATALOG){if(item.profile)Object.freeze(item.profile);if(item.bonuses)Object.freeze(item.bonuses);Object.freeze(item);}for(const a of ACHIEVEMENTS)Object.freeze(a);Object.freeze(CATALOG);Object.freeze(ITEMS);Object.freeze(ACHIEVEMENTS);Object.freeze(ACHIEVEMENT_BY_ID);
@@ -104,7 +106,7 @@ function getLoadout(raw){
 }
 function achievementProgress(raw,campaign){
  const state=sanitizeHarbor(raw),s=state.stats,missions=new Set([...s.missions,...CAMPAIGN_IDS.filter(id=>own(campaign?.cleared,id))]);
- const values={...s,landmarks:s.landmarks.length,regions:s.regions.length,missions:missions.size,legendary:RARITY_ORDER.indexOf(s.highestRarity)>=3?1:0};
+ const values={...s,landmarks:s.landmarks.length,regions:s.regions.length,missions:missions.size,coreMissions:CORE_MISSION_IDS.filter(id=>missions.has(id)).length,legendary:RARITY_ORDER.indexOf(s.highestRarity)>=3?1:0};
  return ACHIEVEMENTS.map(a=>({...a,value:Math.min(a.target,values[a.stat]||0),target:a.target,ratio:Math.min(1,(values[a.stat]||0)/a.target),awarded:state.achievements.includes(a.id),rewardItem:ITEMS[a.reward]}));
 }
 function awardAchievements(state,campaign){
@@ -113,7 +115,7 @@ function awardAchievements(state,campaign){
 function syncProgress(state,meta,campaign){
  if(!state||typeof state!=='object')return [];Object.assign(state,sanitizeHarbor(state));const s=state.stats;
  for(const [key,value]of Object.entries({runs:meta?.runs,wins:meta?.wins,kills:meta?.bestKills,gold:meta?.totalGold,bestLevel:meta?.bestLevel}))s[key]=Math.max(s[key],Math.floor(num(value)));
- const missions=CAMPAIGN_IDS.filter(id=>own(campaign?.cleared,id));s.missions=[...new Set([...s.missions,...missions])];s.bosses=Math.max(s.bosses,s.wins,missions.length);s.regions=[...new Set([...s.regions,...missions.map(id=>Math.floor(CAMPAIGN_IDS.indexOf(id)/5))])];
+ const missions=CAMPAIGN_IDS.filter(id=>own(campaign?.cleared,id));s.missions=[...new Set([...s.missions,...missions])];s.bosses=Math.max(s.bosses,s.wins,missions.length);s.regions=[...new Set([...s.regions,...missions.map(id=>K.BY_ID[id].stage)])];
  for(const id of Array.isArray(meta?.discovered)?meta.discovered:[]){const rarity=scope.UBContent?.ARTIFACTS?.[id]?.rarity?.toUpperCase();if(RARITY_ORDER.indexOf(rarity)>RARITY_ORDER.indexOf(s.highestRarity))s.highestRarity=rarity;}
  return awardAchievements(state,campaign);
 }

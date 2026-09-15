@@ -1,5 +1,6 @@
 (function(scope){
 'use strict';
+const C=typeof module!=='undefined'?require('./content.js'):scope.UBContent;
 const own=(o,k)=>!!o&&Object.hasOwn(o,k),bounded=(v,min,max,fallback=0)=>Number.isFinite(Number(v))?Math.max(min,Math.min(max,Number(v))):fallback;
 const BOSS_SCHEDULE=Object.freeze([240,420,540]);
 const LIEUTENANTS=[['Der Hafenschild','Die Riffjägerin'],['Der Eisenwallvogt','Die Schlackenjägerin'],['Der Nachtvogt','Die Abgrundjägerin']];
@@ -20,13 +21,37 @@ const rows=[
  ['schattentor','Schattentor','The Shadow Gate',2,4,2,['nachtwarte'],['nachtwarte'],'world-arch',5,'A broken triumphal arch guards the royal approach. The final guard carries heavy guns and heavier treasure.','Der Schattenadmiral',150,2900,1.3,1.35,1.1,1.4,115],
  ['tiefenkrone','Tiefenkrone','Crown of the Deep',2,5,1,['sternenschlund','schattentor'],['sternenschlund','schattentor'],'world-crystal',5,'The crown fortress waits among the deepest crystal towers. Defeat its sovereign and reunite the sunken sea lanes.','Der Tiefenkaiser',165,3400,1.45,1.3,1.08,1.5,150]
 ];
+rows.push(
+ ['salzspeicher','Salzspeicher','Salt Granaries',0,0,1,['glockenhafen'],['glockenhafen'],'world-foundry',2,'Hanse merchants sealed their winter stores behind shielded granary barges. Break the wardens and reopen the old salt road.','Der Salzvogt',240,1300,1.05,.95,.95,1.2,50],
+ ['ankerfriedhof','Ankerfriedhof','Anchor Graveyard',0,0,2,['salzspeicher'],['salzspeicher'],'world-arch',2,'Abandoned anchor chains hide flotillas of fuse skiffs. Follow their warning lamps through the graveyard and claim the admiral’s burial tithe.','Die Kettenhüterin',240,1450,1,1,1.05,1.25,60],
+ ['hansekrone','Hansekrone','The Hanse Crown',0,1,2,['ankerfriedhof'],['ankerfriedhof'],'world-bell-tower',3,'A merchant prince binds his shield fleet with repair choirs. Silence the tenders before the guild crown can rise from its flooded counting house.','Der Hansefürst',240,1650,1.1,1.05,.95,1.3,70],
+ ['kesselkai','Kesselkai','Boiler Quay',1,1,3,['werfttor'],['werfttor'],'world-pipeline',3,'Boiler ships bombard the old coal quay. Thread the glowing depth-charge circles and seize the furnace convoys.','Der Kesselbaron',240,2000,1.1,1.1,.95,1.3,80],
+ ['stahlchor','Stahlchor','Choir of Steel',1,2,3,['kesselkai'],['kesselkai'],'world-foundry',4,'The foundry brotherhood repairs its escort fortresses in a relentless steel procession. Cut the healing beams at their source.','Die Stahlkantorin',240,2250,1.2,1.1,.9,1.35,90],
+ ['adlerwerft','Adlerwerft','Eagle Shipyard',1,3,3,['stahlchor'],['stahlchor'],'world-observatory',4,'An electorial eagle watches the imperial slips. Artillery barges fire from behind shield walls as a new flagship leaves its cradle.','Der Werftkurfürst',240,2450,1.15,1.15,1,1.4,100],
+ ['runenkluft','Runenkluft','Rune Chasm',2,5,2,['tiefenkrone'],['tiefenkrone'],'world-crystal',4,'Runic beacons pulse across the royal chasm. Needle guns and fuse skiffs hunt among the lights; read each warning before the ambush closes.','Die Runenseherin',240,2700,1.1,1.2,1.1,1.4,115],
+ ['finsterhorst','Finsterhorst','The Dark Eyrie',2,6,1,['runenkluft'],['runenkluft'],'world-basalt',5,'The last fleet chaplains shelter in a basalt eyrie. Their tenders and shield escorts keep ancient warships moving through the dark.','Der Nebeljäger',240,2950,1.25,1.15,1,1.45,125],
+ ['kaisergrab','Kaisergrab','The Emperor’s Tomb',2,6,0,['finsterhorst'],['finsterhorst'],'world-bell-tower',5,'Beyond the reunited sea lanes lies the emperor’s drowned mausoleum. A complete honor fleet guards the final vault beneath its iron bells.','Der Grabkaiser',240,3600,1.3,1.2,1.05,1.55,175]
+);
+const roster=(entries)=>Object.freeze(entries.map(([kind,weight,from=0])=>Object.freeze({kind,weight,from})));
+const MISSION_MODELS={salzspeicher:'enemy-warden',ankerfriedhof:'enemy-kamikaze',hansekrone:'enemy-bellwarden',kesselkai:'enemy-artillery',stahlchor:'enemy-tender',adlerwerft:'enemy-jagddom',runenkluft:'world-crystal',finsterhorst:'world-basalt',kaisergrab:'enemy-kaiserburg'};
+const PROFILES={
+ salzspeicher:['Shielded merchant escorts',[['scout',25],['rammer',20],['warden',35,20],['gunner',20,30]]],
+ ankerfriedhof:['Fuse-skiff ambush flotilla',[['scout',25],['rammer',15],['kamikaze',40,25],['minelayer',20,45]]],
+ hansekrone:['The guild’s shield and repair fleet',[['scout',20],['gunner',20,25],['warden',30,25],['tender',30,35]]],
+ kesselkai:['Depth artillery and mine boats',[['rammer',20],['gunner',20,25],['artillery',40,35],['minelayer',20,45]]],
+ stahlchor:['Fortress repair procession',[['scout',20],['fort',30,40],['tender',35,30],['warden',15,50]]],
+ adlerwerft:['Shielded imperial gun line',[['rammer',20],['gunner',20,25],['warden',25,35],['artillery',35,45]]],
+ runenkluft:['Needle guns and explosive skiffs',[['scout',20],['sniper',30,25],['kamikaze',35,30],['leech',15,45]]],
+ finsterhorst:['The eyrie’s guarded repair fleet',[['scout',20],['fort',20,40],['tender',25,35],['warden',25,30],['leech',10,55]]],
+ kaisergrab:['The emperor’s complete honor fleet',[['rammer',15],['fort',15,45],['warden',20,30],['artillery',20,40],['tender',15,35],['kamikaze',15,30]]]
+};
 const pct=n=>{const v=Math.round((n-1)*100);return v===0?'standard':(v>0?'+':'')+v+'%';};
 const NODES=[{id:'harbor',name:'Heimathafen',english:'Home Harbor',stage:0,kind:'harbor',q:0,r:0,links:['glockenhafen'],requires:[],model:'world-bell-tower',difficulty:1,desc:'The Hanse fleet begins here. Choose a cleared sea lane, refit your citadel, and chart the next expedition.',objective:'Chart the sunken sea lanes.',condition:'Safe harbor',reward:0,boss:'',bossAt:0,bossHP:0,enemyHp:1,enemyDamage:1,enemySpeed:1,goldMult:1}];
 for(const [id,name,english,stage,q,r,links,requires,model,difficulty,desc,boss,bossAt,bossHP,enemyHp,enemyDamage,enemySpeed,goldMult,reward] of rows){
- NODES.push({id,name,english,stage,kind:'mission',q,r,links:[...links],requires:[...requires],model,difficulty,desc,
+ NODES.push({id,name,english,stage,kind:'mission',q,r,links:[...links],requires:[...requires],model:MISSION_MODELS[id]||model,difficulty,desc,enemyRoster:PROFILES[id]?roster(PROFILES[id][1]):C.DEFAULT_ENEMY_ROSTER,enemyProfile:PROFILES[id]?.[0]||'Mixed sea patrols',
   objective:'Defeat all three guardians in one dive: the vanguard, the hunter, and '+boss+'.',
   condition:'Patrol hulls '+pct(enemyHp)+' · Enemy damage '+pct(enemyDamage)+' · Enemy speed '+pct(enemySpeed)+' · Salvage gold '+pct(goldMult),
-  reward,boss,bossAt:BOSS_SCHEDULE[0],bossHP,enemyHp,enemyDamage,enemySpeed,goldMult,bossWaves:Object.freeze(BOSS_SCHEDULE.map((at,i)=>Object.freeze({at,name:i<2?LIEUTENANTS[stage][i]:boss,role:['vanguard','hunter','sovereign'][i],hpMult:[4,12,28][i],damageMult:[1,1.3,1.6][i]})))});
+  reward,boss,bossAt:BOSS_SCHEDULE[0],bossHP,enemyHp,enemyDamage,enemySpeed,goldMult,bossWaves:Object.freeze(BOSS_SCHEDULE.map((at,i)=>Object.freeze({at,name:i<2?LIEUTENANTS[stage][i]:boss,role:['vanguard','hunter','sovereign'][i],model:['enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'][i],hpMult:[4,12,28][i],damageMult:[1,1.3,1.6][i]})))});
 }
 const BY_ID=Object.fromEntries(NODES.map(n=>[n.id,n]));
 for(const n of NODES)for(const id of n.links)if(!BY_ID[id].links.includes(n.id))BY_ID[id].links.push(n.id);
@@ -68,7 +93,7 @@ function isMissionVictory(game){
 function completionSummary(state){
  const missions=NODES.filter(n=>n.kind==='mission'),cleared=missions.filter(n=>own(state?.cleared,n.id)).length;
  return {cleared,total:missions.length,percent:Math.round(cleared/missions.length*100),complete:cleared===missions.length,
-  regions:[0,1,2].map(stage=>({stage,cleared:missions.filter(n=>n.stage===stage&&own(state?.cleared,n.id)).length,total:5})),
+  regions:[0,1,2].map(stage=>({stage,cleared:missions.filter(n=>n.stage===stage&&own(state?.cleared,n.id)).length,total:missions.filter(n=>n.stage===stage).length})),
   available:missions.filter(n=>isUnlocked(state,n.id)&&!own(state?.cleared,n.id)).map(n=>n.id),position:own(BY_ID,state?.position)?state.position:'harbor'};
 }
 const api={BOSS_SCHEDULE,NODES,BY_ID,isMissionVictory,freshCampaign,sanitizeCampaign,isUnlocked,pathTo,moveTo,recordResult,completionSummary};scope.UBCampaign=api;if(typeof module!=='undefined')module.exports=api;
