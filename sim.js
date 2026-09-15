@@ -5,7 +5,7 @@ const W=typeof module!=='undefined'?require('./world-data.js'):scope.UBWorld;
 const K=typeof module!=='undefined'?require('./campaign-data.js'):scope.UBCampaign;
 const E=typeof module!=='undefined'?require('./expedition-data.js'):scope.UBExpedition;
 const H=typeof module!=='undefined'?(()=>{try{return require('./harbor-data.js');}catch{return null;}})():scope.UBHarbor;
-const {HULLS,RAM,BOSS_COMBAT,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,normalizeRarity,ENEMIES,DEFAULT_ENEMY_ROSTER,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES}=C;
+const {HULLS,weaponHardpoints,RAM,BOSS_COMBAT,CAPTAINS,CREWS,WEAPONS,RARITIES,RARITY_ORDER,BASE_WEAPONS,normalizeRarity,ENEMIES,DEFAULT_ENEMY_ROSTER,ARTIFACTS,EVOLUTIONS,PRESSURES,RESEARCH,BIOMES}=C;
 const TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 function freshMeta(){return {version:2,silver:0,runs:0,wins:0,bestLevel:0,bestKills:0,discovered:[],research:{hull:0,purse:0,magnet:0,weapon:0,reroll:0},settled:[],totalGold:0};}
 function sanitizeMeta(raw){const m=freshMeta();if(!raw||typeof raw!=='object')return m;for(const k of ['silver','runs','wins','bestLevel','bestKills','totalGold'])m[k]=clamp(Math.floor(Number(raw[k])||0),0,1e9);m.discovered=Array.isArray(raw.discovered)?[...new Set(raw.discovered.filter(k=>ARTIFACTS[k]))]:[];m.settled=Array.isArray(raw.settled)?raw.settled.filter(x=>typeof x==='string').slice(-30):[];for(const k in RESEARCH)m.research[k]=clamp(Math.floor(Number(raw.research?.[k])||0),0,RESEARCH[k].max);return m;}
@@ -223,18 +223,64 @@ function harborLoadout(raw){
   this.goldGain(this.art.chestGold||1);this.emit('artifact',{key,factor,rarity});
  } nearest(x,y,range=700,exclude=[]){let out=null,bd=range;for(const e of this.enemies){const d=Math.hypot(e.x-x,e.y-y);if(e.hp>0&&!exclude.includes(e.id)&&d<bd){bd=d;out=e;}}return out;}
  projectile(key,x,y,a,damage,options={}){const b={id:++this.id,key,x,y,ox:x,oy:y,a,damage,speed:options.speed||360,life:options.life||2.5,enemy:false,hitIds:[],...options};this.bound(b,3);if(Number.isFinite(b.tx)&&Number.isFinite(b.ty)){const target=this.bound({x:b.tx,y:b.ty},15);b.tx=target.x;b.ty=target.y;}this.projectiles.push(b);}
- fire(key,active=false){const m=this.modules[key],w=WEAPONS[key];if(!m||this.state!=='playing')return false;const p=this.p,s=this.weaponStats(key),t=this.nearest(p.x,p.y,s.range+100);if(active&&m.active>0)return false;if(!active&&!t&&key!=='mines')return false;const a=t?Math.atan2(t.y-p.y,t.x-p.x):p.a;let damage=s.damage*(active?s.ability*1.7:1);if(active){m.active=s.active;this.stats.abilities++;this.emit('ability',{key});}else m.cool=s.cooldown;
+ // Broadside banks derive entirely from saved hull size, angle and installation order.
+ weaponBanks(index){
+  const p=this.p,h=HULLS[this.hull]||HULLS.nautilus,scale=h.visualScale*10*p.r/h.radius,c=Math.cos(p.a),sn=Math.sin(p.a);
+  return weaponHardpoints(index,this.hull).map(point=>{const [x,,z]=point.position,origin=this.bound({x:p.x+(x*c-z*sn)*scale,y:p.y+(x*sn+z*c)*scale},3);return {side:point.side,x:origin.x,y:origin.y,a:p.a-point.yaw};});
+ }
+ nearestFlank(origin,range,side,exclude=[]){
+  const p=this.p,c=Math.cos(p.a),sn=Math.sin(p.a);let out=null,best=range;
+  for(const e of this.enemies){
+   if(e.hp<=0||exclude.includes(e.id))continue;
+   const lateral=-(e.x-p.x)*sn+(e.y-p.y)*c;
+   // A tiny rotation tolerance keeps the exact bow/stern centerline on port.
+   if((lateral<=1e-8?'port':'starboard')!==side)continue;
+   const d=Math.hypot(e.x-origin.x,e.y-origin.y);if(d<best){best=d;out=e;}
+  }
+  return out;
+ }
+ fire(key,active=false){
+  const m=this.modules[key];if(!m||this.state!=='playing'||active&&m.active>0)return false;
+  const p=this.p,s=this.weaponStats(key),slotIndex=this.moduleOrder.indexOf(key),paired=slotIndex===1||slotIndex===2;
+  const coordinated=key==='cryo'||key==='sonic'||key==='drone'||active&&(key==='flak'||key==='mines');
+  const banks=paired?this.weaponBanks(slotIndex):[{side:'center',x:p.x,y:p.y,a:p.a}];
+  const range=paired&&key==='arc'?(active?440:290)*(active&&m.evolution==='thunder'?1.5:1):s.range+100;
+  const globalTarget=!paired||coordinated?this.nearest(p.x,p.y,s.range+100):null;
+  const targets=paired&&!coordinated?banks.map(bank=>this.nearestFlank(bank,range,bank.side)):[];
+  if(!active&&key!=='mines'&&!(paired&&!coordinated?targets.some(Boolean):globalTarget))return false;
+  // One module, one timer and one ability statistic, regardless of banks fired.
+  if(active){m.active=s.active;this.stats.abilities++;this.emit('ability',{key});}else m.cool=s.cooldown;
+  const visualShots=[];
+  if(!paired||coordinated){
+   const a=globalTarget?Math.atan2(globalTarget.y-p.y,globalTarget.x-p.x):p.a;
+   this.firePayload(key,m,s,p,globalTarget,a,active,false);
+   if(paired)visualShots.push(...banks);else visualShots.push({...banks[0],a});
+  }else{
+   const firstTargets=[];
+   for(let i=0;i<banks.length;i++){
+    const bank=banks[i];let target=targets[i];
+    if(target&&(target.hp<=0||firstTargets.includes(target.id)))target=this.nearestFlank(bank,range,bank.side,firstTargets);
+    if(!target&&!active&&key!=='mines')continue;
+    if(target)firstTargets.push(target.id);
+    const a=key==='mines'?bank.a:target?Math.atan2(target.y-bank.y,target.x-bank.x):bank.a;
+    this.firePayload(key,m,s,bank,target,a,active,true);visualShots.push({...bank,a});
+   }
+  }
+  visualShots.forEach((shot,i)=>this.emit('shot',{key,slotIndex,side:shot.side,x:shot.x,y:shot.y,a:shot.a,active,primary:i===0}));
+  return true;
+ }
+ firePayload(key,m,s,p,t,a,active,paired){let damage=s.damage*(active?s.ability*1.7:1);
   if(key==='torpedo'){const n=(active?6:1+Math.floor(m.auto/3))+(this.art.extraTorpedo||0)+(m.evolution==='swarm'?2:0);for(let i=0;i<n;i++){let aa=a+(i-(n-1)/2)*.12;this.projectile(key,p.x,p.y,aa,damage,{target:t?.id,speed:300,life:3});}}
   if(key==='flak'||key==='harpoon'){const n=(active?(key==='flak'?18:7):key==='flak'?5:1+s.shots)+(key==='flak'&&m.evolution==='hail'?(active?12:4):key==='harpoon'&&m.evolution==='trident'?3:0);for(let i=0;i<n;i++){const aa=active&&key==='flak'?i/n*TAU:a+(i-(n-1)/2)*(key==='flak'?.13:.09);this.projectile(key,p.x,p.y,aa,damage,{speed:key==='harpoon'?510:440,life:key==='harpoon'?1.7:1.15,pierce:true});}}
-  if(key==='arc'){let x=p.x,y=p.y;const hit=[];for(let i=0;i<(active?8:3)+Math.floor(m.auto/2)+(this.art.chains||0)+(m.evolution==='web'?3:0);i++){const e=this.nearest(x,y,(active?440:290)*(active&&m.evolution==='thunder'?1.5:1),hit);if(!e)break;this.emit('arc',{x,y,tx:e.x,ty:e.y});this.emitDamage(e,damage,'electric');hit.push(e.id);e.stun=active?.7:m.evolution==='web'?.22:0;x=e.x;y=e.y;}}
+  if(key==='arc'){let x=p.x,y=p.y;const hit=[];for(let i=0;i<(active?8:3)+Math.floor(m.auto/2)+(this.art.chains||0)+(m.evolution==='web'?3:0);i++){const e=paired&&i===0?t:this.nearest(x,y,(active?440:290)*(active&&m.evolution==='thunder'?1.5:1),hit);if(!e)break;this.emit('arc',{x,y,tx:e.x,ty:e.y});this.emitDamage(e,damage,'electric');hit.push(e.id);e.stun=active?.7:m.evolution==='web'?.22:0;x=e.x;y=e.y;}}
   if(key==='mortar'){const tx=t?.x??p.x+Math.cos(a)*300,ty=t?.y??p.y+Math.sin(a)*300;for(let i=0;i<(active?5:1)*(m.evolution==='double'?2:1);i++){const spread=active?110:20;this.projectile(key,p.x,p.y,a,damage,{tx:tx+(this.rand()-.5)*spread,ty:ty+(this.rand()-.5)*spread,flight:0,duration:1.2,life:1.3});}}
-  if(key==='mines'){for(let i=0;i<(active?(m.evolution==='chain'?12:8):1);i++){const aa=active?i/(m.evolution==='chain'?12:8)*TAU:p.a+Math.PI,r=active?95:60;this.mines.push({id:++this.id,x:p.x+Math.cos(aa)*r,y:p.y+Math.sin(aa)*r,damage,life:18,age:0});this.bound(this.mines[this.mines.length-1],15);}}
+  if(key==='mines'){for(let i=0;i<(active?(m.evolution==='chain'?12:8):1);i++){const aa=active?i/(m.evolution==='chain'?12:8)*TAU:paired?a:p.a+Math.PI,r=active?95:60;this.mines.push({id:++this.id,x:p.x+Math.cos(aa)*r,y:p.y+Math.sin(aa)*r,damage,life:18,age:0});this.bound(this.mines[this.mines.length-1],15);}}
   if(key==='drone'){if(active)this.droneOver=m.evolution==='queen'?12:7;else {const n=2+(this.art.drones||0)+Math.floor(m.auto/3)+(m.evolution==='queen'?3:0);for(let i=0;i<n;i++){const aa=this.time*.75+i/n*TAU,x=p.x+Math.cos(aa)*70,y=p.y+Math.sin(aa)*70,tt=this.nearest(x,y,s.range);if(tt)this.projectile(key,x,y,Math.atan2(tt.y-y,tt.x-x),damage*(this.droneOver>0?1.6:1),{speed:450,life:1.5});}}}
   if(key==='cryo'){const r=(active?340:220)+(m.evolution==='zero'?80:0);this.emit('frost',{x:p.x,y:p.y,r,active});for(const e of this.enemies)if(e.hp>0&&distance(p,e)<r+e.r){this.emitDamage(e,damage*(active?4:1),'cryo');e.slow=active?5:1.3;if(active)e.stun=1;else if(m.evolution==='zero')e.stun=.35;}}
   if(key==='rail'){const length=s.range*(m.evolution==='longshot'?1.35:1),width=active?27:15,charge=active?.65:.35;damage*=(active?2.1:1)*(m.evolution==='longshot'?1.45:1);this.fields.push({id:++this.id,kind:'rail',x:p.x,y:p.y,a,length,width,charge,maxCharge:charge,life:charge+.4,damage,echo:m.evolution==='echo',fired:false});this.emit('railCharge',{x:p.x,y:p.y,tx:p.x+Math.cos(a)*length,ty:p.y+Math.sin(a)*length,width,duration:charge});}
   if(key==='vortex'){const r=(active?265:185)+(m.evolution==='singularity'?70:0),life=active?5:3.4,field={id:++this.id,kind:'vortex',x:t?.x??p.x+Math.cos(a)*260,y:t?.y??p.y+Math.sin(a)*260,r,pull:(active?210:125)*(m.evolution==='singularity'?1.6:1),life,maxLife:life,tick:0,damage,collapse:m.evolution==='collapse'};this.bound(field,100);this.fields.push(field);this.emit('vortex',{x:field.x,y:field.y,r,duration:life});}
   if(key==='flame'){const r=active?375:s.range,cone=active?1.65:.82;damage*=(active?3:1)*(m.evolution==='whiteheat'?1.45:1);for(const e of this.enemies){const d=distance(p,e),da=Math.atan2(e.y-p.y,e.x-p.x)-a;if(e.hp>0&&d<r+e.r&&Math.abs(Math.atan2(Math.sin(da),Math.cos(da)))<cone/2+e.r/Math.max(40,d)){this.emitDamage(e,damage,'thermal');e.burn=Math.max(e.burn||0,active?4.5:3);e.burnDamage=Math.max(e.burnDamage||0,damage*.24);e.burnTick=e.burnTick||.5;if(m.evolution==='whiteheat')e.scorch=.25;}}this.emit('flame',{x:p.x,y:p.y,a,r,cone,duration:active?.8:.35});}
-  if(key==='sonic'){const count=active?3:1,maxR=active?580:s.range;for(let i=0;i<count;i++)this.fields.push({id:++this.id,kind:'sonic',x:p.x,y:p.y,r:0,maxR,speed:340,width:25,life:maxR/340*2+1,damage,hitIds:[],returning:false,resonance:m.evolution==='resonance',breaker:m.evolution==='breaker',delay:i*.32});this.emit('sonic',{x:p.x,y:p.y,r:maxR,duration:maxR/340});}  this.emit('shot',{key,x:p.x,y:p.y,a,active});return true;
+  if(key==='sonic'){const count=active?3:1,maxR=active?580:s.range;for(let i=0;i<count;i++)this.fields.push({id:++this.id,kind:'sonic',x:p.x,y:p.y,r:0,maxR,speed:340,width:25,life:maxR/340*2+1,damage,hitIds:[],returning:false,resonance:m.evolution==='resonance',breaker:m.evolution==='breaker',delay:i*.32});this.emit('sonic',{x:p.x,y:p.y,r:maxR,duration:maxR/340});}
  }
  updateFields(dt){
   for(const f of this.fields){f.life-=dt;

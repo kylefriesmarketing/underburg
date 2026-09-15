@@ -8,16 +8,33 @@ const svgNS='http://www.w3.org/2000/svg';
 /** Presentation only. Site discovery, combat and rewards belong to Game. */
 export class ExpeditionUI {
  constructor({onChart,onInteract,onTrack}){
-  this.onTrack=onTrack;this.tracked=null;this.runId=null;
-  this.el=document.createElement('div');this.el.id='expedition-dock';this.el.innerHTML='<button id="survey-open" aria-keyshortcuts="T"><span class="survey-glyph">◈</span><span><strong>SURVEY CHART <kbd>T</kbd></strong><small id="survey-count">0 / 8 SITES SECURED</small></span></button><button id="site-interact" aria-keyshortcuts="G" hidden><kbd>G</kbd><span><strong></strong><small></small></span><i></i></button>';
-  document.getElementById('hud').append(this.el);this.el.querySelector('#survey-open').onclick=onChart;this.button=this.el.querySelector('#site-interact');this.button.onclick=onInteract;
+  this.onTrack=onTrack;this.tracked=null;this.runId=null;this.layoutFrame=0;this.layoutSize='';
+  this.chart=document.createElement('button');this.chart.id='survey-open';this.chart.setAttribute('aria-keyshortcuts','T');this.chart.innerHTML='<span class="survey-glyph" aria-hidden="true">◈</span><span><strong>SURVEY CHART <kbd>T</kbd></strong><small id="survey-count">0 / 8 SITES SECURED</small></span>';this.chart.onclick=onChart;
+  this.el=document.createElement('div');this.el.id='expedition-dock';this.el.hidden=true;this.el.innerHTML='<button id="site-interact" aria-keyshortcuts="G" hidden><kbd>G</kbd><span><strong></strong><small></small></span><i></i></button>';
+  document.getElementById('hud').append(this.chart,this.el);this.button=this.el.querySelector('#site-interact');this.button.onclick=onInteract;window.addEventListener('resize',()=>this.queueLayout());
  }
  update(game){
   if(this.runId!==game.runId){this.runId=game.runId;this.tracked=null;}
   const summary=game.siteSummary||{captured:0,total:8},prompt=game.sitePrompt;
-  this.el.querySelector('#survey-count').textContent=summary.captured+' / '+summary.total+' SITES SECURED';
-  this.button.hidden=!prompt;this.el.classList.toggle('has-site',!!prompt);
+  this.chart.querySelector('#survey-count').textContent=summary.captured+' / '+summary.total+' SITES SECURED';this.chart.setAttribute('aria-label','Survey chart, T. '+summary.captured+' of '+summary.total+' sites secured.');
+  this.button.hidden=!prompt;this.el.hidden=!prompt;this.el.classList.toggle('has-site',!!prompt);this.queueLayout();
   if(prompt){this.button.disabled=game.state!=='playing'||!prompt.canInteract;this.button.dataset.status=prompt.status;this.button.style.setProperty('--site-color',COLORS[prompt.kind]||'#9de6c6');this.button.querySelector('strong').textContent=prompt.name;const activeText=!prompt.inside?'RETURN TO THE RING · PROGRESS PAUSED':['bastion','shrine'].includes(prompt.kind)&&prompt.guardsRemaining?'DEFEAT '+prompt.guardsRemaining+' GUARDS':Math.floor(prompt.progress||0)+' / '+Math.ceil(prompt.duration||1)+'s · '+(prompt.kind==='salvage'?'DEFEND THE WRECK':prompt.kind==='beacon'?'AVOID DAMAGE':'HOLD POSITION');this.button.querySelector('small').textContent=prompt.status==='active'?activeText:(prompt.action||TITLES[prompt.kind]||'INTERACT');this.button.querySelector('i').style.width=Math.min(100,(prompt.progress||0)/Math.max(1,prompt.duration||1)*100)+'%';}
+ }
+ queueLayout(){if(!this.layoutFrame)this.layoutFrame=requestAnimationFrame(()=>{this.layoutFrame=0;this.layout();});}
+ layout(){
+  if(!this.chart.getClientRects().length)return;const rect=this.chart.getBoundingClientRect(),gap=6,size=innerWidth+'x'+innerHeight,preferred=parseFloat(getComputedStyle(this.chart).getPropertyValue('--survey-top'))||rect.top;
+  // Read current HUD geometry after main has placed the waypoint; the side control never
+  // competes with telemetry, a live contact, or the bottom ability targets on short screens.
+  const selectors=['header','.mission','.run-currency','.telemetry','#boss-hud','#radar','.abilities','.weapons-panel','#toast','#site-interact'];
+  const visible=e=>{if(!e||!e.getClientRects().length)return false;const style=getComputedStyle(e);return style.visibility!=='hidden'&&Number(style.opacity)>.05;};
+  const obstacles=selectors.map(s=>document.querySelector(s)).filter(visible).map(e=>e.getBoundingClientRect()).filter(r=>r.right+gap>rect.left&&r.left-gap<rect.right);
+  const fits=y=>y>=16&&y+rect.height<=innerHeight-16&&obstacles.every(r=>y+rect.height+gap<=r.top||y-gap>=r.bottom);
+  const candidates=[preferred,...obstacles.flatMap(r=>[r.bottom+gap,r.top-rect.height-gap])].filter(fits).sort((a,b)=>Math.abs(a-preferred)-Math.abs(b-preferred));
+  const y=this.layoutSize===size&&Number.isFinite(this.utilityTop)&&fits(this.utilityTop)?this.utilityTop:candidates[0]??preferred;this.layoutSize=size;this.utilityTop=y;
+  if(this.chart.style.top!==y+'px')this.chart.style.top=y+'px';
+  // A world waypoint may approach the HUD edge. Offset only its presentation so the
+  // persistent chart button stays in place and the target name remains readable.
+  const marker=document.getElementById('nav-marker');if(marker){marker.style.translate='';if(visible(marker)){const r=marker.getBoundingClientRect();let dx=0,dy=0;if(r.right+gap>rect.left&&r.left-gap<rect.right&&r.bottom+gap>y&&r.top-gap<y+rect.height)dx=Math.min(0,rect.left-gap-r.right);if(visible(this.button)){const action=this.button.getBoundingClientRect();if(r.right+dx+gap>action.left&&r.left+dx-gap<action.right&&r.bottom+gap>action.top&&r.top-gap<action.bottom)dy=action.top-gap-r.bottom;}if(dx||dy)marker.style.translate=dx+'px '+dy+'px';}}
  }
  target(game){return game.sites?.find(s=>s.id===this.tracked&&s.discovered&&s.status!=='captured')||null;}
  draw(container,game,choose){

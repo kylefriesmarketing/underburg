@@ -69,7 +69,7 @@ export class OceanView{
   if(e.type==='sonar')this.post.pulse({x:e.x,y:e.y,r:e.r,strength:.65,life:1.1,kind:'sonar'});
   if(e.type==='explode'&&(e.boss||e.elite))this.post.pulse({x:e.x,y:e.y,r:e.size*2.4,strength:e.boss?.85:.42,life:e.boss?1.15:.7,kind:'blast'});
   if(e.type==='ram')this.post.pulse({x:e.x,y:e.y,r:100,strength:.24,life:.45,kind:'ram'});
-  if(e.type==='shot'){const ship=this.entities.get('player'),point=ship?.shipAssembly?.shot(e.key,e.active,e.a);this.impactFX.muzzle(point,e.key,e.active);if(e.active&&!this.reducedMotion)this.shake=Math.max(this.shake,.12);}
+  if(e.type==='shot'){const ship=this.entities.get('player'),point=ship?.shipAssembly?.shot(e.key,e.active,e.a,e.side);this.impactFX.muzzle(point,e.key,e.active);if(e.active&&!this.reducedMotion)this.shake=Math.max(this.shake,.12);}
   if(e.type==='bossStrike'&&e.pattern==='fan'){const ship=this.entities.get(e.id),point=ship?.shipAssembly?.shot('flak',true,e.a);this.impactFX.muzzle(point,'flak',true);}
   if(e.type==='ram'&&!this.reducedMotion)this.shake=Math.min(.8,.28+(e.impulse||0)*.0015);
   if(e.type==='gold'){if(e.value>=8)this.label(e,'+'+e.value+' G','#f1ce83',true);if(Math.random()<.35)this.addSprite(e.x,e.y,1.7,palette.gold,.3,1);}
