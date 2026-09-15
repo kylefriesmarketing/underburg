@@ -45,7 +45,7 @@ export class Atlas {
    const base=this.mesh(new THREE.CylinderGeometry(4.05,3.8,2.6,6),this.material(p.side),g);base.position.y=-1.55;base.castShadow=true;
    const rim=this.mesh(rimGeo,this.material(p.edge,{metalness:.65,roughness:.3}),g);rim.position.y=.13;
    for(let band=0;band<2;band++){const line=this.mesh(new THREE.CylinderGeometry(4.065-band*.12,4.065-band*.12,.055,6),this.material(p.edge,{transparent:true,opacity:.16}),g);line.position.y=-.65-band*1.25;}
-   const model=new THREE.Group();g.add(model);this.miniature(n.model||'shipyard',model,n.kind==='harbor'?4.6:4.3,0,-.65,-.4+(i%3)*.65);
+   const model=new THREE.Group();g.add(model);this.miniature(({"glockenhafen":"world-hansehaus","hansekrone":"world-hansehaus","kaiserwerk":"world-druckwerk","schmelzkessel":"world-druckwerk","nachtwarte":"world-kaiserdom","tiefenkrone":"world-kaiserdom","kaisergrab":"world-kaiserdom"})[n.id]||n.model||'shipyard',model,n.kind==='harbor'?4.6:4.3,0,-.65,-.4+(i%3)*.65);
    for(let j=0;j<4;j++){const a=j*2.399+i*.5,r=2.6+hash(i*19+j)*.6;const deco=n.stage===2?(j%2?'world-crystal':'rock-b'):n.stage===1?(j%2?'wreck':'rock-a'):(j%2?'kelp':'coral');this.miniature(deco,model,.6+hash(i*13+j)*1.05,Math.cos(a)*r,Math.sin(a)*r,a);}
    const halo=this.mesh(new THREE.RingGeometry(3.58,3.78,6).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({color:0xffd286,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false}),g);halo.position.y=.19;
    const beacon=this.mesh(new THREE.CylinderGeometry(.06,.06,2,6),new THREE.MeshBasicMaterial({color:p.glow}),g);beacon.position.set(2.7,1,1.2);

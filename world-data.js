@@ -3,8 +3,22 @@
 // Map coordinates are simulation units. heightAt alone receives Three.js world units.
 const WORLD_ASSETS=['world-bell-tower','world-arch','world-observatory','world-foundry','world-pipeline','world-basalt','world-crystal','world-anemone'];
 
+// Presentation only: saved world layout, solids, rewards and all RNG remain unchanged.
+const LANDMARK_DEPTH_ASSETS=Object.freeze(['world-hansehaus','world-druckwerk','world-kaiserdom']);
+const LANDMARK_PRESENTATIONS=Object.freeze({
+ 'gardens-glockenhafen':0,'gardens-bernsteinwarte':0,'harbor':0,
+ 'iron-kaiserwerk':1,'iron-schmelzkessel':1,
+ 'trench-nachtwarte':2,'trench-tiefenkrone':2
+});
+function landmarkPresentation(def,stage=0){
+ const index=LANDMARK_PRESENTATIONS[def.id];
+ if(index===undefined)return {model:def.model,theme:['hanse','pressure','imperial'][stageIndex(stage)],baseRadius:null,scale:def.scale||1};
+ const baseRadius=[5,9,6.5][index];
+ return {model:LANDMARK_DEPTH_ASSETS[index],theme:['hanse','pressure','imperial'][index],baseRadius,scale:def.solidRadius>0?def.solidRadius*.1/baseRadius:def.scale||1};
+}
+
 const MAP_EXTENT=4300,BOUNDARY_SEGMENTS=512,TAU=Math.PI*2;
-const EXPANSION_ASSETS=['growth-deck','growth-engine','growth-tower','growth-reactor','growth-battery','growth-crown','site-bastion','site-salvage','site-beacon','site-shrine','module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
+const EXPANSION_ASSETS=[...LANDMARK_DEPTH_ASSETS,"evolution-torpedo-swarm","evolution-torpedo-split","evolution-arc-web","evolution-arc-thunder","evolution-harpoon-trident","evolution-harpoon-whale","crown-nautilus","crown-bastion","crown-wraith","guardian-bell-armor","guardian-lance-fin","guardian-crown-armor",'growth-deck','growth-engine','growth-tower','growth-reactor','growth-battery','growth-crown','site-bastion','site-salvage','site-beacon','site-shrine','module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
 const stageIndex=stage=>Math.max(0,Math.min(2,Math.floor(Number(stage)||0)));
 function basinShape(a,stage){
  if(stage===0)return 3810+135*Math.cos(a*2+.3)+65*Math.sin(a*3-.7)+35*Math.cos(a*7+1.1);
@@ -104,5 +118,5 @@ function heightAt(x,z,stage=0){
  const trench=[7.7,9.4,12][stage]*mainChannel+3.5*crossChannel;
  return Math.max(-17,Math.min(-.65,-1.05-shelf-terrace-trench));
 }
-const api={WORLD_ASSETS,EXPANSION_ASSETS,MAP_EXTENT,BOUNDARY_SEGMENTS,boundaryRadius,boundaryVertices,boundaryDistance,constrainToBoundary,createWorld,heightAt};scope.UBWorld=api;if(typeof module!=='undefined')module.exports=api;
+const api={WORLD_ASSETS,LANDMARK_DEPTH_ASSETS,landmarkPresentation,EXPANSION_ASSETS,MAP_EXTENT,BOUNDARY_SEGMENTS,boundaryRadius,boundaryVertices,boundaryDistance,constrainToBoundary,createWorld,heightAt};scope.UBWorld=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

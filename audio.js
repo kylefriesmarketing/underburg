@@ -40,6 +40,8 @@ export class Soundscape{
   if(e.type==='installed'){this.tone(88,.23,'triangle',.05,45);this.noise(.12,.045,2300,.14);}
   if(e.type==='heal'){this.tone(440,.55,'sine',.06,880);this.tone(659,.7,'sine',.04,1175,.1);}
   if(e.type==='boss'||e.type==='overtime'){const base=e.role==='vanguard'?73.42:e.role==='hunter'?82.41:55;this.tone(base,2,'sawtooth',.07,base*.89);this.tone(base*1.0595,2,'sawtooth',.045,base*.945);this.tone(base*2.67,2.5,'sine',.08);if(e.role==='vanguard')this.chord([220,440,660],2.5,.025);if(e.role==='hunter')this.tone(659,.8,'triangle',.035,220,.4);}
+  if(e.type==='guardianBuckling'&&throttle('guardianBuckling'+e.id,.35)){const base=e.role==='hunter'?180:e.role==='vanguard'?125:88;this.noise(.34,.055,1900);this.tone(base,.38,'triangle',.035,base*.35);this.tone(base*3.1,.2,'sine',.018,base*.9,.055);}
+  if(e.type==='guardianSinking'&&throttle('guardianSinking'+e.id,1.8)){const base=e.role==='sovereign'?48:e.role==='vanguard'?58:73;this.tone(base,1.15,'sine',.09,22);this.noise(.85,.08,680);this.tone(base*3,.65,'triangle',.026,40,.12);this.noise(.35,.024,1500,.32);}
   if(e.type==='bossDefeated')this.chord([196,246.94,293.66,392],1.6,.065);
   if(e.type==='bossCharge'){this.tone(73.42,.6,'triangle',.08,55);this.tone(146.83,.4,'sine',.04,110,.13);}
   if(e.type==='shieldPulse'&&throttle('shieldPulse',.55)){this.tone(220,.6,'triangle',.045,330);this.tone(660,.4,'sine',.035,880,.1);}

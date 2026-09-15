@@ -25,7 +25,7 @@ export class ImpactFX{
  pressure(x,y,r,color=0xffd594,life=.5){this.emit('pressure',x*S,2.7,y*S,r*S,life,color);}
  event(e,game){
   if(e.type==='damage'){this.burst(e.x,e.y,15,e.crit?5:2,e.family==='electric'?0xa0eced:0xd4b985);if(e.crit)this.emit('flash',e.x*S,4,e.y*S,1.8,.14,0xffecc7);}
-  if(e.type==='explode'){this.burst(e.x,e.y,e.size,e.boss?30:e.elite?18:10);this.pressure(e.x,e.y,e.size*1.7,0xffce84,e.boss?.95:.55);this.emit('flash',e.x*S,4,e.y*S,e.size*.17,.43,0xffc383);}
+  if(e.type==='explode'){this.burst(e.x,e.y,e.size,e.boss?10:e.elite?18:10);this.pressure(e.x,e.y,e.size*1.7,0xffce84,e.boss?.95:.55);this.emit('flash',e.x*S,4,e.y*S,e.size*.17,.43,0xffc383);}
   if(e.type==='ram'){this.burst(e.x,e.y,45,17,0xffdfac);this.pressure(e.x,e.y,Math.min(140,45+e.impulse*.2),0xc5ffed,.38);this.emit('flash',e.x*S,4,e.y*S,5,.19,0xffead0);}
   if(e.type==='hit'&&game){this.burst(game.p.x,game.p.y,20,5,0x99d5d1);}
   if(e.type==='bossStrike'&&e.pattern==='fan'){this.pressure(e.x,e.y,50,0xffd19b,.3);}

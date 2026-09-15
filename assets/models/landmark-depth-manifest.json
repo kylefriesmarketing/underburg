@@ -1,0 +1,83 @@
+{
+  "world-hansehaus": {
+    "file": "world-hansehaus.glb",
+    "triangles": 5878,
+    "meshes": 9,
+    "bytes": 364008,
+    "bounds": {
+      "min": [
+        -5.0,
+        0.0,
+        -5.0
+      ],
+      "max": [
+        5.0,
+        20.6,
+        5.0
+      ]
+    },
+    "dimensions": [
+      10.0,
+      20.6,
+      10.0
+    ],
+    "collisionRadius": 5,
+    "maximumHorizontalRadius": 5.0,
+    "footing": "closed 64-sided circle; no traversable gate",
+    "description": "Drowned Hanseatic guildhall: ivory-capped brick stair gables, sealed amber windows, astronomical clock lantern and verdigris helm."
+  },
+  "world-druckwerk": {
+    "file": "world-druckwerk.glb",
+    "triangles": 8804,
+    "meshes": 7,
+    "bytes": 625876,
+    "bounds": {
+      "min": [
+        -9.0,
+        0.0,
+        -9.0
+      ],
+      "max": [
+        9.0,
+        17.75,
+        9.0
+      ]
+    },
+    "dimensions": [
+      18.0,
+      17.75,
+      18.0
+    ],
+    "collisionRadius": 9,
+    "maximumHorizontalRadius": 9.0,
+    "footing": "closed 64-sided circle; no traversable gate",
+    "description": "Imperial pressureworks: central riveted bronze reservoir, paired tall stacks, sight glasses, transfer pipes and manometer house."
+  },
+  "world-kaiserdom": {
+    "file": "world-kaiserdom.glb",
+    "triangles": 3834,
+    "meshes": 9,
+    "bytes": 258244,
+    "bounds": {
+      "min": [
+        -6.5,
+        0.0,
+        -6.5
+      ],
+      "max": [
+        6.5,
+        23.455,
+        6.5
+      ]
+    },
+    "dimensions": [
+      13.0,
+      23.455,
+      13.0
+    ],
+    "collisionRadius": 6.5,
+    "maximumHorizontalRadius": 6.5,
+    "footing": "closed 64-sided circle; no traversable gate",
+    "description": "Abyssal imperial chapel: sealed octagonal nave, silver flying ribs, violet lancets and suspended eight-point crystal crown."
+  }
+}

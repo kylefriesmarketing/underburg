@@ -1,0 +1,475 @@
+{
+  "evolution-torpedo-swarm": {
+    "file": "evolution-torpedo-swarm.glb",
+    "triangles": 2092,
+    "meshes": 5,
+    "bytes": 139984,
+    "bounds": {
+      "min": [
+        -1.155,
+        0.0,
+        -1.111
+      ],
+      "max": [
+        1.595,
+        1.665,
+        1.111
+      ]
+    },
+    "dimensions": [
+      2.75,
+      1.665,
+      2.222
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Schwarmkammer: six open homing cells, a riveted Gothic magazine and a working rear loading crosshead.",
+    "muzzles": [
+      {
+        "name": "Muzzle 02 | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          0.67,
+          0.65
+        ]
+      },
+      {
+        "name": "Muzzle 03 | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          1.32,
+          0.65
+        ]
+      },
+      {
+        "name": "Muzzle 04 | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          0.67,
+          -0.0
+        ]
+      },
+      {
+        "name": "Muzzle | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          1.32,
+          -0.0
+        ]
+      },
+      {
+        "name": "Muzzle 06 | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          0.67,
+          -0.65
+        ]
+      },
+      {
+        "name": "Muzzle 07 | evolution-torpedo-swarm",
+        "position": [
+          1.65,
+          1.32,
+          -0.65
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime recoil X | evolution-torpedo-swarm",
+        "origin": [
+          -1.08,
+          0.87,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "evolution-torpedo-split": {
+    "file": "evolution-torpedo-split.glb",
+    "triangles": 1804,
+    "meshes": 5,
+    "bytes": 119060,
+    "bounds": {
+      "min": [
+        -1.15,
+        0.0,
+        -0.88
+      ],
+      "max": [
+        1.81,
+        1.98,
+        0.88
+      ]
+    },
+    "dimensions": [
+      2.96,
+      1.98,
+      1.76
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Spaltladung: one massive pressure-charge bore, twin pearl arming cells, armored gable and rotary safety collar.",
+    "muzzles": [
+      {
+        "name": "Muzzle | evolution-torpedo-split",
+        "position": [
+          1.9,
+          1.03,
+          -0.0
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime flywheel X | evolution-torpedo-split",
+        "origin": [
+          0.81,
+          1.03,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "evolution-arc-web": {
+    "file": "evolution-arc-web.glb",
+    "triangles": 1528,
+    "meshes": 5,
+    "bytes": 113264,
+    "bounds": {
+      "min": [
+        -0.79,
+        0.0,
+        -0.8032
+      ],
+      "max": [
+        0.905,
+        2.28,
+        0.8032
+      ]
+    },
+    "dimensions": [
+      1.695,
+      2.28,
+      1.6064
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Sturmnetz: three forked Gothic lightning branches, stormglass terminals and a rotating induction crown.",
+    "muzzles": [
+      {
+        "name": "Muzzle | evolution-arc-web",
+        "position": [
+          0.1,
+          2.07,
+          -0.0
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime flywheel Y | evolution-arc-web",
+        "origin": [
+          0.0,
+          1.2,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "evolution-arc-thunder": {
+    "file": "evolution-arc-thunder.glb",
+    "triangles": 1860,
+    "meshes": 5,
+    "bytes": 126980,
+    "bounds": {
+      "min": [
+        -0.79,
+        0.0,
+        -0.8446
+      ],
+      "max": [
+        0.79,
+        2.37,
+        0.8446
+      ]
+    },
+    "dimensions": [
+      1.58,
+      2.37,
+      1.6891
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Donnerschlag: thick vertical induction stack, broad thunder cap, heavy conductor braces and rising interrupter.",
+    "muzzles": [
+      {
+        "name": "Muzzle | evolution-arc-thunder",
+        "position": [
+          0.0,
+          2.41,
+          -0.0
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime piston Y | evolution-arc-thunder",
+        "origin": [
+          0.0,
+          1.77,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "evolution-harpoon-trident": {
+    "file": "evolution-harpoon-trident.glb",
+    "triangles": 1406,
+    "meshes": 5,
+    "bytes": 100300,
+    "bounds": {
+      "min": [
+        -1.245,
+        0.0,
+        -1.0203
+      ],
+      "max": [
+        2.13,
+        1.275,
+        1.0203
+      ]
+    },
+    "dimensions": [
+      3.375,
+      1.275,
+      2.0405
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Dreizack: three loaded barbed arbalest rails, luminous rear tension house and powered cable wheel.",
+    "muzzles": [
+      {
+        "name": "Muzzle 02 | evolution-harpoon-trident",
+        "position": [
+          2.18,
+          1.08,
+          0.65
+        ]
+      },
+      {
+        "name": "Muzzle | evolution-harpoon-trident",
+        "position": [
+          2.18,
+          1.08,
+          -0.0
+        ]
+      },
+      {
+        "name": "Muzzle 03 | evolution-harpoon-trident",
+        "position": [
+          2.18,
+          1.08,
+          -0.65
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime flywheel Z | evolution-harpoon-trident",
+        "origin": [
+          -0.85,
+          0.75,
+          0.96
+        ]
+      }
+    ]
+  },
+  "evolution-harpoon-whale": {
+    "file": "evolution-harpoon-whale.glb",
+    "triangles": 1728,
+    "meshes": 5,
+    "bytes": 121124,
+    "bounds": {
+      "min": [
+        -1.23,
+        0.0,
+        -0.9452
+      ],
+      "max": [
+        2.44,
+        1.8,
+        0.9452
+      ]
+    },
+    "dimensions": [
+      3.67,
+      1.8,
+      1.8904
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Walbrecher: a colossal single whale bolt, swept pressure-bow arms, stepped winch gables and moving twin cable drum.",
+    "muzzles": [
+      {
+        "name": "Muzzle | evolution-harpoon-whale",
+        "position": [
+          2.48,
+          1.22,
+          -0.0
+        ]
+      }
+    ],
+    "mechanisms": [
+      {
+        "name": "Runtime flywheel Z | evolution-harpoon-whale",
+        "origin": [
+          -0.82,
+          1.19,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "crown-nautilus": {
+    "file": "crown-nautilus.glb",
+    "triangles": 1842,
+    "meshes": 5,
+    "bytes": 119432,
+    "bounds": {
+      "min": [
+        -1.742,
+        0.0,
+        -1.39
+      ],
+      "max": [
+        1.805,
+        2.468,
+        1.39
+      ]
+    },
+    "dimensions": [
+      3.547,
+      2.468,
+      2.78
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Nautilus Class IV: Hanseatic navigation facade, open astral sextant, observatory turrets and maritime railings.",
+    "muzzles": [],
+    "mechanisms": [],
+    "clearAperture": [
+      2.6,
+      1.4
+    ]
+  },
+  "crown-bastion": {
+    "file": "crown-bastion.glb",
+    "triangles": 2364,
+    "meshes": 5,
+    "bytes": 148880,
+    "bounds": {
+      "min": [
+        -1.711,
+        0.0,
+        -1.418
+      ],
+      "max": [
+        1.711,
+        2.33,
+        1.418
+      ]
+    },
+    "dimensions": [
+      3.422,
+      2.33,
+      2.836
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Eisenwall Class IV: broad armored citadel shoulders, shielded gates, low copper turret helmets and heavy crenellations.",
+    "muzzles": [],
+    "mechanisms": [],
+    "clearAperture": [
+      2.6,
+      1.4
+    ]
+  },
+  "crown-wraith": {
+    "file": "crown-wraith.glb",
+    "triangles": 1172,
+    "meshes": 5,
+    "bytes": 81508,
+    "bounds": {
+      "min": [
+        -1.7792,
+        0.0,
+        -1.23
+      ],
+      "max": [
+        1.715,
+        2.135,
+        1.23
+      ]
+    },
+    "dimensions": [
+      3.4942,
+      2.135,
+      2.46
+    ],
+    "forwardAxis": "+X",
+    "upAxis": "+Y",
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "description": "Nachtjager Class IV: low swept Gothic knife sails, forked signal needles, narrow luminous lancets and flying spine braces.",
+    "muzzles": [],
+    "mechanisms": [],
+    "clearAperture": [
+      2.6,
+      1.4
+    ]
+  }
+}

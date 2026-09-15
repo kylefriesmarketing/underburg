@@ -1,0 +1,98 @@
+{
+  "guardian-bell-armor": {
+    "file": "guardian-bell-armor.glb",
+    "description": "Hinged Gothic bellwarden shield with a rose relief, rivets and protected pressure-fracture seam.",
+    "triangles": 924,
+    "meshes": 4,
+    "bytes": 66116,
+    "dimensions": [
+      2.35,
+      2.5502,
+      0.485
+    ],
+    "bounds": {
+      "min": [
+        -1.175,
+        -0.0702,
+        -0.2
+      ],
+      "max": [
+        1.175,
+        2.48,
+        0.285
+      ]
+    },
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "hingeAxis": "+X",
+    "forwardAxis": "+X",
+    "upAxis": "+Y"
+  },
+  "guardian-lance-fin": {
+    "file": "guardian-lance-fin.glb",
+    "description": "Swept Jagddom servo fin with gilded edges, compression collars and four luminous cooling slits.",
+    "triangles": 628,
+    "meshes": 5,
+    "bytes": 49104,
+    "dimensions": [
+      3.0,
+      1.582,
+      0.3473
+    ],
+    "bounds": {
+      "min": [
+        -1.52,
+        -0.022,
+        -0.172
+      ],
+      "max": [
+        1.48,
+        1.56,
+        0.1753
+      ]
+    },
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "hingeAxis": "+X",
+    "forwardAxis": "+X",
+    "upAxis": "+Y"
+  },
+  "guardian-crown-armor": {
+    "file": "guardian-crown-armor.glb",
+    "description": "Stepped imperial crown shutter with pointed vents, copper buttresses and articulated lower hinge.",
+    "triangles": 508,
+    "meshes": 5,
+    "bytes": 36536,
+    "dimensions": [
+      1.97,
+      2.1637,
+      0.485
+    ],
+    "bounds": {
+      "min": [
+        -0.985,
+        -0.0327,
+        -0.19
+      ],
+      "max": [
+        0.985,
+        2.131,
+        0.295
+      ]
+    },
+    "mountOrigin": [
+      0,
+      0,
+      0
+    ],
+    "hingeAxis": "+X",
+    "forwardAxis": "+X",
+    "upAxis": "+Y"
+  }
+}

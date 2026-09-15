@@ -19,3 +19,10 @@
 @media(max-width:850px){.boss-phase{margin-top:5px;gap:3px}.boss-phase strong{font-size:6px;letter-spacing:0}.boss-phase em{font-size:6px}#hud:has(#boss-hud.mission-bosses:not(.hidden)) .telemetry{top:314px}#hud:has(#boss-hud.mission-bosses:not(.hidden)) #toast{top:312px}}
 
 @media(min-width:851px){#hud:has(#boss-hud.mission-bosses:not(.hidden)) #toast{top:calc(128px + var(--active-boss-count,1)*46px)}}
+
+/* Keep transient messages clear of nearby-place details on compact screens. */
+@media(max-width:850px){
+ #hud #toast{top:312px;left:20px;transform:none;text-align:left;max-width:calc(100% - 135px);font-size:9px;line-height:1.4}
+ #hud .telemetry{top:314px}
+ #hud:has(#boss-hud:not(.hidden)) #location-chip{display:none}
+}
