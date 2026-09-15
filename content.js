@@ -83,8 +83,8 @@ const EVOLUTIONS={
 };
 const PRESSURES={
  survey:{name:'Erkundung',english:'Survey',desc:'Standard expedition. Learn the currents and build something outrageous.',hp:1,damage:1,speed:1,reward:1},
- abyssal:{name:'Tiefendruck',english:'Abyssal',desc:'Stronger, faster hunters. Earn 35% more silver.',hp:1.5,damage:1.35,speed:1.12,reward:1.35},
- iron:{name:'Eiserne Flut',english:'Iron Tide',desc:'Relentless heavy fortresses. Earn 75% more silver.',hp:2.1,damage:1.7,speed:1.22,reward:1.75}
+ abyssal:{name:'Tiefendruck',english:'Abyssal',desc:'Stronger, faster hunters. Earn 35% more gold at mission end.',hp:1.5,damage:1.35,speed:1.12,reward:1.35},
+ iron:{name:'Eiserne Flut',english:'Iron Tide',desc:'Relentless heavy fortresses. Earn 75% more gold at mission end.',hp:2.1,damage:1.7,speed:1.22,reward:1.75}
 };
 const RESEARCH={
  hull:{name:'Druckhüllen',desc:'+12 starting hull per rank.',cost:30,max:6},

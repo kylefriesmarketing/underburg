@@ -2,7 +2,7 @@
 
 [Play Ünderburg](https://kylefriesmarketing.github.io/underburg/)
 
-A 3D underwater fortress roguelite. Sail between sea-chart tiles, salvage gold, collect artifacts, upgrade your submarine citadel, and defeat three guardians in each of fifteen original missions. Bosses arrive at 4:00, 7:00, and 9:00; all three must fall in the same run. Explore large reef-bounded basins, fight specialized enemy vessels, and collect five reward rarities from Common to Universe. Spend silver on ship fittings and blueprints, customize your fortress, and earn unique equipment through twelve achievements.
+A 3D underwater fortress roguelite. Sail between sea-chart tiles, salvage gold, collect artifacts, upgrade your submarine citadel, and defeat three guardians in each of fifteen original missions. Bosses arrive at 4:00, 7:00, and 9:00; all three must fall in the same run. Explore large reef-bounded basins, fight specialized enemy vessels, and collect five reward rarities from Common to Universe. Earn banked gold when missions end. Permanently purchase ships, captains, crews, starting modules, pressure settings, fittings, and research. One starter in each category is free. Customize your fortress and unlock unique rewards and advanced weapon purchases through twelve achievements.
 
 No installation or account required. Use a modern browser with WebGL. Progress saves in the browser on your own device.
 

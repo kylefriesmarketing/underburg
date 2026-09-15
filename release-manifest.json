@@ -1,5 +1,5 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "files": [
     "index.html",
     "ui.css",
@@ -101,5 +101,5 @@
     "README.md",
     "release-manifest.json"
   ],
-  "bytes": 13864400
+  "bytes": 13874702
 }
