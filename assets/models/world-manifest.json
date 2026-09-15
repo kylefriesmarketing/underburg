@@ -1,0 +1,194 @@
+{
+  "world-bell-tower": {
+    "file": "world-bell-tower.glb",
+    "triangles": 3428,
+    "meshes": 5,
+    "bytes": 228384,
+    "bounds": {
+      "min": [
+        -4.478,
+        -0.262,
+        -3.15
+      ],
+      "max": [
+        3.45,
+        15.25,
+        3.15
+      ]
+    },
+    "dimensions": [
+      7.928,
+      15.512,
+      6.3
+    ],
+    "description": "Sunken Hanseatic harbor bell tower, open belfry, bronze bell, clock faces, steep slate roof."
+  },
+  "world-arch": {
+    "file": "world-arch.glb",
+    "triangles": 2892,
+    "meshes": 3,
+    "bytes": 168748,
+    "bounds": {
+      "min": [
+        -7.3,
+        -0.229,
+        -4.529
+      ],
+      "max": [
+        7.5,
+        12.125,
+        3.595
+      ]
+    },
+    "dimensions": [
+      14.8,
+      12.354,
+      8.124
+    ],
+    "description": "Broken limestone aqueduct with individually modeled arch stones, channel parapets and coral regrowth."
+  },
+  "world-observatory": {
+    "file": "world-observatory.glb",
+    "triangles": 6612,
+    "meshes": 4,
+    "bytes": 442412,
+    "bounds": {
+      "min": [
+        -6.3,
+        0.0,
+        -5.5
+      ],
+      "max": [
+        6.3,
+        9.429,
+        5.5
+      ]
+    },
+    "dimensions": [
+      12.6,
+      9.429,
+      11.0
+    ],
+    "description": "Brass-ribbed turquoise pressure dome, observation ports, telescope and copper annexes."
+  },
+  "world-foundry": {
+    "file": "world-foundry.glb",
+    "triangles": 3712,
+    "meshes": 5,
+    "bytes": 244080,
+    "bounds": {
+      "min": [
+        -8.09,
+        0.0,
+        -4.65
+      ],
+      "max": [
+        8.09,
+        12.63,
+        5.22
+      ]
+    },
+    "dimensions": [
+      16.18,
+      12.63,
+      9.87
+    ],
+    "description": "Drowned red-brick foundry, glowing sawtooth skylights, boilers, chimneys and gantry."
+  },
+  "world-pipeline": {
+    "file": "world-pipeline.glb",
+    "triangles": 3180,
+    "meshes": 5,
+    "bytes": 220396,
+    "bounds": {
+      "min": [
+        -7.2,
+        -0.28,
+        -4.542
+      ],
+      "max": [
+        7.302,
+        4.87,
+        3.764
+      ]
+    },
+    "dimensions": [
+      14.502,
+      5.15,
+      8.306
+    ],
+    "description": "Broken bolted iron conduit with copper bypass, valve wheel, pressure gauge and exposed ends."
+  },
+  "world-basalt": {
+    "file": "world-basalt.glb",
+    "triangles": 1940,
+    "meshes": 3,
+    "bytes": 155388,
+    "bounds": {
+      "min": [
+        -5.815,
+        -0.05,
+        -3.292
+      ],
+      "max": [
+        4.8,
+        17.68,
+        3.495
+      ]
+    },
+    "dimensions": [
+      10.615,
+      17.73,
+      6.787
+    ],
+    "description": "Jointed basalt chimney cluster with sulfur-lit apertures and molten base fissures."
+  },
+  "world-crystal": {
+    "file": "world-crystal.glb",
+    "triangles": 1090,
+    "meshes": 4,
+    "bytes": 88144,
+    "bounds": {
+      "min": [
+        -5.411,
+        -0.28,
+        -2.925
+      ],
+      "max": [
+        5.63,
+        9.22,
+        2.979
+      ]
+    },
+    "dimensions": [
+      11.041,
+      9.5,
+      5.904
+    ],
+    "description": "Branching six-sided abyssal crystals with bright turquoise facets and luminous terminal points."
+  },
+  "world-anemone": {
+    "file": "world-anemone.glb",
+    "triangles": 6636,
+    "meshes": 4,
+    "bytes": 468372,
+    "bounds": {
+      "min": [
+        -5.852,
+        -0.15,
+        -4.402
+      ],
+      "max": [
+        5.658,
+        7.962,
+        4.402
+      ]
+    },
+    "dimensions": [
+      11.511,
+      8.112,
+      8.804
+    ],
+    "description": "Three immense umbrella corals with scalloped glowing edges, radial ribs and hanging bioluminescent polyps."
+  }
+}

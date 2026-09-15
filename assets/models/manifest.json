@@ -1,0 +1,314 @@
+{
+  "nautilus": {
+    "file": "nautilus.glb",
+    "triangles": 18468,
+    "meshes": 7,
+    "bytes": 903308
+  },
+  "bastion": {
+    "file": "bastion.glb",
+    "triangles": 19332,
+    "meshes": 6,
+    "bytes": 925848
+  },
+  "wraith": {
+    "file": "wraith.glb",
+    "triangles": 18684,
+    "meshes": 6,
+    "bytes": 908104
+  },
+  "corsair": {
+    "file": "corsair.glb",
+    "triangles": 18468,
+    "meshes": 7,
+    "bytes": 903304
+  },
+  "dreadnought": {
+    "file": "dreadnought.glb",
+    "triangles": 24380,
+    "meshes": 7,
+    "bytes": 1178344
+  },
+  "module-torpedo": {
+    "file": "module-torpedo.glb",
+    "triangles": 1792,
+    "meshes": 4,
+    "bytes": 98088
+  },
+  "module-arc": {
+    "file": "module-arc.glb",
+    "triangles": 2192,
+    "meshes": 5,
+    "bytes": 114156
+  },
+  "module-flak": {
+    "file": "module-flak.glb",
+    "triangles": 1620,
+    "meshes": 3,
+    "bytes": 77944
+  },
+  "module-mortar": {
+    "file": "module-mortar.glb",
+    "triangles": 912,
+    "meshes": 4,
+    "bytes": 51300
+  },
+  "module-mines": {
+    "file": "module-mines.glb",
+    "triangles": 3112,
+    "meshes": 4,
+    "bytes": 141732
+  },
+  "module-harpoon": {
+    "file": "module-harpoon.glb",
+    "triangles": 600,
+    "meshes": 3,
+    "bytes": 33488
+  },
+  "module-drone": {
+    "file": "module-drone.glb",
+    "triangles": 1816,
+    "meshes": 5,
+    "bytes": 73408
+  },
+  "module-cryo": {
+    "file": "module-cryo.glb",
+    "triangles": 1696,
+    "meshes": 3,
+    "bytes": 81224
+  },
+  "module-sonar": {
+    "file": "module-sonar.glb",
+    "triangles": 1492,
+    "meshes": 4,
+    "bytes": 55336
+  },
+  "module-salvage": {
+    "file": "module-salvage.glb",
+    "triangles": 904,
+    "meshes": 4,
+    "bytes": 51420
+  },
+  "module-repair": {
+    "file": "module-repair.glb",
+    "triangles": 3608,
+    "meshes": 5,
+    "bytes": 114612
+  },
+  "module-armor": {
+    "file": "module-armor.glb",
+    "triangles": 988,
+    "meshes": 4,
+    "bytes": 52852
+  },
+  "chest": {
+    "file": "chest.glb",
+    "triangles": 620,
+    "meshes": 3,
+    "bytes": 26632
+  },
+  "colony": {
+    "file": "colony.glb",
+    "triangles": 4128,
+    "meshes": 7,
+    "bytes": 142160
+  },
+  "shipyard": {
+    "file": "shipyard.glb",
+    "triangles": 6388,
+    "meshes": 7,
+    "bytes": 340836
+  },
+  "repair": {
+    "file": "repair.glb",
+    "triangles": 6604,
+    "meshes": 7,
+    "bytes": 346728
+  },
+  "rock-a": {
+    "file": "rock-a.glb",
+    "triangles": 100,
+    "meshes": 1,
+    "bytes": 11628
+  },
+  "rock-b": {
+    "file": "rock-b.glb",
+    "triangles": 100,
+    "meshes": 1,
+    "bytes": 11616
+  },
+  "kelp": {
+    "file": "kelp.glb",
+    "triangles": 8100,
+    "meshes": 1,
+    "bytes": 217108
+  },
+  "coral": {
+    "file": "coral.glb",
+    "triangles": 3816,
+    "meshes": 2,
+    "bytes": 113956
+  },
+  "fan": {
+    "file": "fan.glb",
+    "triangles": 648,
+    "meshes": 1,
+    "bytes": 29512
+  },
+  "wreck": {
+    "file": "wreck.glb",
+    "triangles": 3708,
+    "meshes": 7,
+    "bytes": 188228
+  },
+  "vent": {
+    "file": "vent.glb",
+    "triangles": 176,
+    "meshes": 2,
+    "bytes": 15216
+  },
+  "relic-amberLedger": {
+    "file": "relic-amberLedger.glb",
+    "triangles": 756,
+    "meshes": 3,
+    "bytes": 24204
+  },
+  "relic-hanseSeal": {
+    "file": "relic-hanseSeal.glb",
+    "triangles": 620,
+    "meshes": 3,
+    "bytes": 35060
+  },
+  "relic-krakenLens": {
+    "file": "relic-krakenLens.glb",
+    "triangles": 1244,
+    "meshes": 6,
+    "bytes": 69904
+  },
+  "relic-thunderBell": {
+    "file": "relic-thunderBell.glb",
+    "triangles": 1420,
+    "meshes": 2,
+    "bytes": 49828
+  },
+  "relic-volatilePearl": {
+    "file": "relic-volatilePearl.glb",
+    "triangles": 892,
+    "meshes": 2,
+    "bytes": 36524
+  },
+  "relic-saltCrown": {
+    "file": "relic-saltCrown.glb",
+    "triangles": 680,
+    "meshes": 2,
+    "bytes": 45108
+  },
+  "relic-abyssHeart": {
+    "file": "relic-abyssHeart.glb",
+    "triangles": 1152,
+    "meshes": 2,
+    "bytes": 34816
+  },
+  "relic-salvageMagnet": {
+    "file": "relic-salvageMagnet.glb",
+    "triangles": 760,
+    "meshes": 3,
+    "bytes": 48732
+  },
+  "relic-pressureDial": {
+    "file": "relic-pressureDial.glb",
+    "triangles": 716,
+    "meshes": 5,
+    "bytes": 55156
+  },
+  "relic-masterKey": {
+    "file": "relic-masterKey.glb",
+    "triangles": 540,
+    "meshes": 1,
+    "bytes": 26088
+  },
+  "relic-echoMirror": {
+    "file": "relic-echoMirror.glb",
+    "triangles": 892,
+    "meshes": 2,
+    "bytes": 36532
+  },
+  "relic-coralOath": {
+    "file": "relic-coralOath.glb",
+    "triangles": 1784,
+    "meshes": 5,
+    "bytes": 69188
+  },
+  "relic-jetValve": {
+    "file": "relic-jetValve.glb",
+    "triangles": 1124,
+    "meshes": 2,
+    "bytes": 64964
+  },
+  "relic-whiteAnchor": {
+    "file": "relic-whiteAnchor.glb",
+    "triangles": 472,
+    "meshes": 2,
+    "bytes": 30160
+  },
+  "relic-frostStar": {
+    "file": "relic-frostStar.glb",
+    "triangles": 372,
+    "meshes": 3,
+    "bytes": 24548
+  },
+  "relic-gildedFuse": {
+    "file": "relic-gildedFuse.glb",
+    "triangles": 1148,
+    "meshes": 4,
+    "bytes": 69480
+  },
+  "relic-huntsmanClock": {
+    "file": "relic-huntsmanClock.glb",
+    "triangles": 1004,
+    "meshes": 5,
+    "bytes": 72368
+  },
+  "relic-torpedoGyro": {
+    "file": "relic-torpedoGyro.glb",
+    "triangles": 1292,
+    "meshes": 6,
+    "bytes": 90904
+  },
+  "relic-diversMedal": {
+    "file": "relic-diversMedal.glb",
+    "triangles": 584,
+    "meshes": 3,
+    "bytes": 33468
+  },
+  "relic-bronzeLung": {
+    "file": "relic-bronzeLung.glb",
+    "triangles": 1160,
+    "meshes": 3,
+    "bytes": 65992
+  },
+  "relic-droneHive": {
+    "file": "relic-droneHive.glb",
+    "triangles": 1940,
+    "meshes": 4,
+    "bytes": 98224
+  },
+  "relic-harpoonChain": {
+    "file": "relic-harpoonChain.glb",
+    "triangles": 2488,
+    "meshes": 2,
+    "bytes": 150676
+  },
+  "relic-salvageChoir": {
+    "file": "relic-salvageChoir.glb",
+    "triangles": 848,
+    "meshes": 3,
+    "bytes": 44300
+  },
+  "relic-finalDividend": {
+    "file": "relic-finalDividend.glb",
+    "triangles": 1136,
+    "meshes": 3,
+    "bytes": 39632
+  }
+}
