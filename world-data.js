@@ -4,7 +4,7 @@
 const WORLD_ASSETS=['world-bell-tower','world-arch','world-observatory','world-foundry','world-pipeline','world-basalt','world-crystal','world-anemone'];
 
 const MAP_EXTENT=4300,BOUNDARY_SEGMENTS=512,TAU=Math.PI*2;
-const EXPANSION_ASSETS=['module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
+const EXPANSION_ASSETS=['site-bastion','site-salvage','site-beacon','site-shrine','module-rail','module-vortex','module-flame','module-sonic','enemy-minelayer','enemy-sniper','enemy-carrier','enemy-leech','enemy-warden','enemy-artillery','enemy-tender','enemy-kamikaze','enemy-bellwarden','enemy-jagddom','enemy-kaiserburg'];
 const stageIndex=stage=>Math.max(0,Math.min(2,Math.floor(Number(stage)||0)));
 function basinShape(a,stage){
  if(stage===0)return 3810+135*Math.cos(a*2+.3)+65*Math.sin(a*3-.7)+35*Math.cos(a*7+1.1);
@@ -98,9 +98,11 @@ function heightAt(x,z,stage=0){
  const a=[.23,-.57,.92][Math.max(0,Math.min(2,Math.floor(stage)))],u=x*Math.cos(a)+z*Math.sin(a),v=-x*Math.sin(a)+z*Math.cos(a);
  const shelf=.55+.42*Math.sin(u*.034+stage*1.7)*Math.cos(v*.028)+.26*Math.sin(u*.061-v*.042);
  const channelCenter=12*Math.sin(u*.025+stage*.8),crossCenter=20*Math.sin(v*.019+1.4);
- const mainChannel=Math.exp(-Math.pow((v-channelCenter)/(stage===2?10:13),2));
+ const mainChannel=Math.exp(-Math.pow((v-channelCenter)/([17,16,15][stage]),2));
  const crossChannel=Math.exp(-Math.pow((u-crossCenter-64)/(stage===1?11:16),2));
- return Math.max(-6,Math.min(-.65,-.92-shelf-3.65*mainChannel-1.25*crossChannel));
+ const terrace=.55*Math.sin(u*.011+v*.013);
+ const trench=[7.7,9.4,12][stage]*mainChannel+3.5*crossChannel;
+ return Math.max(-17,Math.min(-.65,-1.05-shelf-terrace-trench));
 }
 const api={WORLD_ASSETS,EXPANSION_ASSETS,MAP_EXTENT,BOUNDARY_SEGMENTS,boundaryRadius,boundaryVertices,boundaryDistance,constrainToBoundary,createWorld,heightAt};scope.UBWorld=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

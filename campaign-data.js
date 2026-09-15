@@ -72,7 +72,7 @@ function sanitizeCampaign(raw){
  if(raw.cleared&&typeof raw.cleared==='object'&&!Array.isArray(raw.cleared))for(const n of NODES){
   if(n.kind!=='mission'||!own(raw.cleared,n.id)||!isUnlocked(state,n.id))continue;
   const entry=raw.cleared[n.id];if(entry!==true&&(!entry||typeof entry!=='object'||Array.isArray(entry)))continue;
-  state.cleared[n.id]={wins:Math.floor(bounded(entry.wins,1,1e6,1)),bestTime:bounded(entry.bestTime,0,1e7),bestLevel:Math.floor(bounded(entry.bestLevel,1,10000,1)),firstRunId:typeof entry.firstRunId==='string'?entry.firstRunId.slice(0,160):''};
+  state.cleared[n.id]={wins:Math.floor(bounded(entry.wins,1,1e6,1)),bestTime:bounded(entry.bestTime,0,1e7),bestLevel:Math.floor(bounded(entry.bestLevel,1,10000,1)),firstRunId:typeof entry.firstRunId==='string'?entry.firstRunId.slice(0,160):'',bestSites:Math.floor(bounded(entry.bestSites,0,8)),siteKinds:Array.isArray(entry.siteKinds)?[...new Set(entry.siteKinds.filter(kind=>['bastion','salvage','beacon','shrine'].includes(kind)))].sort():[]};
  }
  state.settled=Array.isArray(raw.settled)?[...new Set(raw.settled.filter(id=>typeof id==='string'&&id.length>0&&id.length<=160))].slice(-10000):[];
  if(own(BY_ID,raw.position)&&pathTo(state,raw.position))state.position=raw.position;
@@ -86,8 +86,8 @@ function isMissionVictory(game){
  if(!n||n.kind!=='mission'||!['won','lost'].includes(game.state)||typeof runId!=='string'||!runId||runId.length>160||!Array.isArray(state?.settled)||state.settled.includes(runId)||!isUnlocked(state,id))return 0;
  if(game.state==='won'&&!isMissionVictory(game))return 0;
  state.settled.push(runId);if(game.state!=='won')return 0;
- const old=own(state.cleared,id)?state.cleared[id]:null,time=bounded(game.time,0,1e7),level=Math.floor(bounded(game.level,1,10000,1));
- state.cleared[id]={wins:old?Math.min(1e6,(old.wins||1)+1):1,bestTime:old&&old.bestTime>0?Math.min(old.bestTime,time):time,bestLevel:Math.max(old?.bestLevel||1,level),firstRunId:old?.firstRunId||runId};
+ const old=own(state.cleared,id)?state.cleared[id]:null,time=bounded(game.time,0,1e7),level=Math.floor(bounded(game.level,1,10000,1)),sites=(Array.isArray(game.sites)?game.sites:[]).filter(s=>s.status==='captured'&&s.rewarded&&['bastion','salvage','beacon','shrine'].includes(s.kind));
+ state.cleared[id]={wins:old?Math.min(1e6,(old.wins||1)+1):1,bestTime:old&&old.bestTime>0?Math.min(old.bestTime,time):time,bestLevel:Math.max(old?.bestLevel||1,level),firstRunId:old?.firstRunId||runId,bestSites:Math.max(old?.bestSites||0,Math.min(8,new Set(sites.map(s=>s.id)).size)),siteKinds:[...new Set([...(old?.siteKinds||[]),...sites.map(s=>s.kind)])].sort()};
  return old?0:n.reward;
 }
 function completionSummary(state){

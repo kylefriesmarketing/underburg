@@ -1,0 +1,82 @@
+/* Live reward text and Blender item portraits inside original rendered frame plates. */
+.reward-draft{background:radial-gradient(ellipse at 50% 40%,#18382de0,#03111bef 80%);backdrop-filter:blur(9px)}
+.reward-draft .modal-inner{max-width:1120px}
+.reward-draft.universe-reward .modal-inner{border:0;padding-top:0;background:radial-gradient(ellipse at 50% 45%,#8967c814,transparent 62%)}
+.reward-draft .reward-card{background:transparent!important}
+.reward-draft #modal-title{font-size:clamp(34px,3.4vw,48px);margin:12px 0}
+.reward-draft #modal-desc{max-width:630px;font-size:11px;line-height:1.6}
+.reward-draft #modal-info{margin-top:12px;font-size:10px;letter-spacing:.8px}
+.reward-draft #choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch;max-width:1050px;margin:22px auto 0;padding:8px 3px 10px;perspective:1400px}
+.reward-draft #choices:has(>.reward-card:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr));max-width:710px}
+.reward-card{--frame:url('./assets/ui/cards/common.png');--deal-index:0;--frame-cap:54px;--card-ink:#d8e1d5;--card-pane:#10252b;display:flex;flex-direction:column;isolation:isolate;position:relative;min-width:0;min-height:488px;padding:60px 13% 60px!important;text-align:center;background:transparent!important;border:0!important;border-radius:0;overflow:visible;box-shadow:none!important;filter:drop-shadow(0 14px 16px #0008);transform-origin:50% 65%;transition:transform .22s ease,filter .22s ease;animation:cardDeal .5s both;animation-delay:calc(var(--deal-index)*85ms)}
+.reward-card[data-rarity="rare"]{--frame:url('./assets/ui/cards/rare.png');--card-pane:#11272f}
+.reward-card[data-rarity="epic"]{--frame:url('./assets/ui/cards/epic.png');--card-pane:#231d37}
+.reward-card[data-rarity="legendary"]{--frame:url('./assets/ui/cards/legendary.png');--card-pane:#2c241a}
+.reward-card[data-rarity="universe"]{--frame:url('./assets/ui/cards/universe.png');--card-pane:#171b36}
+.reward-card:before{content:'';position:absolute;inset:8% 9% 8%;height:auto;background:radial-gradient(ellipse at 50% 24%,color-mix(in srgb,var(--rarity) 20%,transparent),transparent 45%),linear-gradient(165deg,var(--card-pane),#06141bf5);border:1px solid color-mix(in srgb,var(--rarity) 20%,transparent);border-radius:12px;z-index:-1;pointer-events:none}
+.reward-card:after{content:'';position:absolute;inset:0;background:none;border:solid transparent;border-width:var(--frame-cap) 12.5%;border-image-source:var(--frame);border-image-slice:120 96;border-image-width:var(--frame-cap) 12.5%;border-image-repeat:stretch;z-index:3;pointer-events:none;filter:drop-shadow(0 2px 2px #0007)}
+.reward-card:not(:disabled):hover{transform:translateY(-7px) rotateX(2deg);filter:drop-shadow(0 19px 19px #000a) brightness(1.09)}
+.reward-card:not(:disabled):active{transform:translateY(-1px) scale(.985)}
+.reward-card:focus-visible{outline:2px solid var(--rarity);outline-offset:-4px;filter:drop-shadow(0 0 11px color-mix(in srgb,var(--rarity) 40%,transparent))}
+.reward-card:disabled{opacity:.55;filter:saturate(.35) drop-shadow(0 10px 12px #0008)}
+.reward-card .reward-copy{display:contents}
+.reward-card .reward-copy>*{position:relative;z-index:2}
+.reward-card strong{order:1;font-family:Georgia,'Times New Roman',serif;font-size:25px;line-height:1.05;font-weight:400;letter-spacing:-.5px;color:#f0ebd6;margin:0;min-height:27px;overflow-wrap:anywhere;text-shadow:0 2px 2px #000a}
+.reward-card .english{order:2;display:block;color:#b7c9c1;font-size:8px;line-height:1.4;letter-spacing:.65px;margin:6px 0 0;min-height:12px}
+.reward-card.has-model .choice-icon{order:3;position:relative;left:auto;top:auto;display:flex;justify-content:center;align-items:center;flex:0 0 142px;width:100%;height:142px;margin:2px 0 0;z-index:1}
+.reward-card.has-model .model-portrait{width:100%;max-width:228px;height:146px;object-fit:contain;filter:drop-shadow(0 11px 8px #0008);transition:transform .25s ease}
+.reward-card:hover .model-portrait,.reward-card:focus-visible .model-portrait{transform:translateY(-4px) scale(1.045)}
+.reward-card .tag{order:4;display:flex;align-items:center;justify-content:center;min-height:29px;font-size:7px;line-height:1.6;font-weight:650;letter-spacing:.85px;color:var(--rarity);padding:7px 0 8px;border-top:1px solid color-mix(in srgb,var(--rarity) 35%,transparent);border-bottom:1px solid color-mix(in srgb,var(--rarity) 15%,transparent);margin:0 0 11px}
+.reward-card p{order:5;flex:1;font-size:11px;line-height:1.65;color:var(--card-ink);margin:0 0 13px;min-height:53px;max-width:none}
+.reward-card .price{order:6;display:flex;align-items:center;justify-content:space-between;gap:8px;border:0;border-top:1px solid color-mix(in srgb,var(--rarity) 20%,transparent);padding:11px 0 0;margin:0;color:#edd19b;font-size:10px;line-height:1.35}
+.reward-card .price>span{font-size:7px;letter-spacing:.8px;text-align:left;max-width:70%}
+.reward-card .price>b{font-size:11px;white-space:nowrap}
+.reward-card .rarity{order:7;display:block;color:var(--rarity);font-size:8px;font-weight:700;line-height:1.25;letter-spacing:2.2px;margin:13px 0 0;text-shadow:0 0 15px color-mix(in srgb,var(--rarity) 35%,transparent)}
+.reward-card .rarity:before,.reward-card .rarity:after{content:'◆';display:inline-block;font-size:5px;margin:0 8px;vertical-align:middle}
+.reward-draft #modal-actions{margin-top:14px;gap:9px}
+.reward-draft #modal-actions .secondary{font-size:8px;letter-spacing:.9px;padding:12px 19px}
+.reward-swipe-hint{display:none}
+@keyframes cardDeal{from{opacity:0;transform:translateY(25px) rotateY(-8deg) scale(.95)}to{opacity:1;transform:none}}
+@media(min-width:851px) and (max-height:800px){
+ .reward-draft{padding:23px 25px}
+ .reward-draft #modal-title{font-size:36px;margin:9px 0}
+ .reward-draft #choices{max-width:940px;margin-top:13px}
+ .reward-draft #choices:has(>.reward-card:nth-child(2):last-child){max-width:636px}
+ .reward-card{--frame-cap:46px;min-height:448px;padding-top:52px!important;padding-bottom:52px!important}
+ .reward-card strong{font-size:22px}
+ .reward-card.has-model .choice-icon{flex-basis:120px;height:120px}
+ .reward-card.has-model .model-portrait{height:126px}
+ .reward-card .tag{font-size:6.5px;margin-bottom:9px}
+ .reward-card p{font-size:10px;line-height:1.55;min-height:43px}
+}
+@media(max-width:850px){
+ .reward-draft{padding:22px 0 18px;align-items:flex-start;overflow-x:hidden}
+ .reward-draft .modal-inner{margin:0 auto;max-width:100%;min-width:0;overflow:hidden}
+ .reward-draft #modal-kicker{display:block;font-size:6px;letter-spacing:1.15px;padding:0 20px}
+ .reward-draft #modal-title{font-size:31px;margin:11px 20px 9px;line-height:1.04}
+ .reward-draft #modal-desc{font-size:10px;line-height:1.55;margin:0 25px;max-width:none}
+ .reward-draft #modal-info{font-size:8px;letter-spacing:.5px;margin:11px 18px 0}
+ .reward-draft .rarity-ladder{gap:6px;flex-wrap:wrap;margin-top:9px;font-size:5px}
+ .reward-swipe-hint{display:block;margin:12px 0 0;font-size:6px;letter-spacing:1.8px;color:#a0c3b7}
+ .reward-draft #choices,.reward-draft #choices:has(>.reward-card:nth-child(2):last-child){display:flex;grid-template-columns:none;gap:10px;align-items:stretch;max-width:none;margin:4px 0 0;padding:12px 24px 20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:24px;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#97b8a343 transparent;perspective:none}
+ .reward-card{--frame-cap:46px;flex:0 0 min(315px,calc(100vw - 64px));scroll-snap-align:center;min-height:459px;max-width:none;width:min(315px,calc(100vw - 64px));padding:52px 12% 52px!important;animation-duration:.4s;animation-delay:calc(var(--deal-index)*65ms)}
+ .reward-card strong{font-size:23px}
+ .reward-card .english{font-size:8px;min-height:12px}
+ .reward-card.has-model .choice-icon{position:relative;left:auto;top:auto;width:100%;height:133px;flex-basis:133px;margin:3px 0 1px}
+ .reward-card.has-model .model-portrait{width:100%;max-width:210px;height:137px}
+ .reward-card .tag{font-size:6.5px;line-height:1.55;min-height:27px;margin-bottom:10px}
+ .reward-card p{font-size:10px;line-height:1.6;min-height:49px;margin-bottom:13px}
+ .reward-card .price{padding-top:10px;margin-top:0;font-size:10px}
+ .reward-card .price>span{font-size:6.5px}
+ .reward-card .rarity{font-size:7px;margin-top:12px}
+ .reward-draft #modal-actions{padding:0 20px;margin-top:6px;gap:8px}
+ .reward-draft #modal-actions button{min-height:44px;font-size:7px;padding:12px;letter-spacing:.7px}
+}
+@media(max-width:850px) and (max-height:720px){
+ .reward-draft{padding-top:16px}
+ .reward-draft #modal-title{font-size:28px;margin-top:8px;margin-bottom:7px}
+ .reward-draft #modal-desc{display:none}
+ .reward-draft #modal-info{margin-top:8px}
+ .reward-draft #choices{margin-top:0;padding-top:8px}
+}
+@media(prefers-reduced-motion:reduce){.reward-card,.reward-card .model-portrait{animation:none!important;transition:none!important}.reward-card:not(:disabled):hover,.reward-card:hover .model-portrait,.reward-card:focus-visible .model-portrait{transform:none}}
